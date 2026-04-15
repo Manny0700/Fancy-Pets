@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pawfect Days — Premium Dog Care</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== THEME VARIABLES ===== */
+    .theme-spring {
+      --bg: #f5f0e8; --bg2: #ebe4d8; --bg3: #e0d8c8;
+      --accent: #6b9e5e; --accent2: #d47e7e; --accent3: #8ab8d4;
+      --text: #2a201c; --text-muted: #6b5c52;
+      --card: #fdfaf5; --card2: #f5f0e8;
+      --nav-bg: rgba(245,240,232,0.88);
+      --border: rgba(107,158,94,0.28); --border2: rgba(107,158,94,0.12);
+      --shadow: rgba(107,158,94,0.18); --shadow2: rgba(107,158,94,0.08);
+      --btn-bg: #6b9e5e; --btn-text: #fff;
+      --gradient: linear-gradient(135deg,#6b9e5e,#8ab87e);
+      --hero-glow: rgba(107,158,94,0.12);
+    }
+    .theme-summer {
+      --bg: #fff8ee; --bg2: #fff1d8; --bg3: #ffe8c0;
+      --accent: #e8922a; --accent2: #1aafb8; --accent3: #e85a4f;
+      --text: #1a2828; --text-muted: #4a6060;
+      --card: #fffdf8; --card2: #fff8ee;
+      --nav-bg: rgba(255,248,238,0.88);
+      --border: rgba(232,146,42,0.28); --border2: rgba(232,146,42,0.12);
+      --shadow: rgba(232,146,42,0.18); --shadow2: rgba(232,146,42,0.08);
+      --btn-bg: #e8922a; --btn-text: #fff;
+      --gradient: linear-gradient(135deg,#e8922a,#e8c44a);
+      --hero-glow: rgba(232,146,42,0.1);
+    }
+    .theme-fall {
+      --bg: #140c06; --bg2: #1c1008; --bg3: #24140a;
+      --accent: #d4732a; --accent2: #a83030; --accent3: #d4a030;
+      --text: #f0e4d0; --text-muted: #a09080;
+      --card: #1c1008; --card2: #20120a;
+      --nav-bg: rgba(20,12,6,0.92);
+      --border: rgba(212,115,42,0.28); --border2: rgba(212,115,42,0.1);
+      --shadow: rgba(212,115,42,0.22); --shadow2: rgba(212,115,42,0.1);
+      --btn-bg: #d4732a; --btn-text: #fff;
+      --gradient: linear-gradient(135deg,#d4732a,#a83030);
+      --hero-glow: rgba(212,115,42,0.15);
+    }
+    .theme-winter {
+      --bg: #0a1420; --bg2: #0e1c2c; --bg3: #122030;
+      --accent: #4a9ec8; --accent2: #7ab8e8; --accent3: #a0d0f0;
+      --text: #e0eaf8; --text-muted: #6888a8;
+      --card: #0e1c2c; --card2: #122030;
+      --nav-bg: rgba(10,20,32,0.92);
+      --border: rgba(74,158,200,0.28); --border2: rgba(74,158,200,0.1);
+      --shadow: rgba(74,158,200,0.2); --shadow2: rgba(74,158,200,0.08);
+      --btn-bg: #4a9ec8; --btn-text: #0a1420;
+      --gradient: linear-gradient(135deg,#4a9ec8,#7ab8e8);
+      --hero-glow: rgba(74,158,200,0.12);
+    }
+    .theme-halloween {
+      --bg: #0a0404; --bg2: #140806; --bg3: #1c0c08;
+      --accent: #f06800; --accent2: #8a28e0; --accent3: #f0c000;
+      --text: #f8e8d0; --text-muted: #a07060;
+      --card: #140806; --card2: #180a06;
+      --nav-bg: rgba(10,4,4,0.95);
+      --border: rgba(240,104,0,0.35); --border2: rgba(240,104,0,0.12);
+      --shadow: rgba(240,104,0,0.28); --shadow2: rgba(240,104,0,0.1);
+      --btn-bg: #f06800; --btn-text: #fff;
+      --gradient: linear-gradient(135deg,#f06800,#8a28e0);
+      --hero-glow: rgba(240,104,0,0.15);
+    }
+    .theme-christmas {
+      --bg: #060e06; --bg2: #081408; --bg3: #0c1a0c;
+      --accent: #c83030; --accent2: #c8a820; --accent3: #5aa85a;
+      --text: #f0ece0; --text-muted: #7a9878;
+      --card: #081408; --card2: #0c1a0c;
+      --nav-bg: rgba(6,14,6,0.94);
+      --border: rgba(200,48,48,0.32); --border2: rgba(200,48,48,0.12);
+      --shadow: rgba(200,48,48,0.22); --shadow2: rgba(200,48,48,0.08);
+      --btn-bg: #c83030; --btn-text: #fff;
+      --gradient: linear-gradient(135deg,#c83030,#5aa85a);
+      --hero-glow: rgba(200,48,48,0.15);
+    }
+    .theme-valentines {
+      --bg: #140608; --bg2: #1c0a0e; --bg3: #240c12;
+      --accent: #d82858; --accent2: #f09888; --accent3: #a01838;
+      --text: #f8e8ee; --text-muted: #b07888;
+      --card: #1c0a0e; --card2: #200c10;
+      --nav-bg: rgba(20,6,8,0.94);
+      --border: rgba(216,40,88,0.32); --border2: rgba(216,40,88,0.12);
+      --shadow: rgba(216,40,88,0.22); --shadow2: rgba(216,40,88,0.08);
+      --btn-bg: #d82858; --btn-text: #fff;
+      --gradient: linear-gradient(135deg,#d82858,#f09888);
+      --hero-glow: rgba(216,40,88,0.15);
+    }
+    .theme-independence {
+      --bg: #f4f0ea; --bg2: #e8e0d4; --bg3: #dcd4c8;
+      --accent: #b01820; --accent2: #183880; --accent3: #d0d8f0;
+      --text: #12141e; --text-muted: #40485a;
+      --card: #ffffff; --card2: #f4f0ea;
+      --nav-bg: rgba(244,240,234,0.9);
+      --border: rgba(176,24,32,0.28); --border2: rgba(176,24,32,0.1);
+      --shadow: rgba(176,24,32,0.18); --shadow2: rgba(176,24,32,0.07);
+      --btn-bg: #b01820; --btn-text: #fff;
+      --gradient: linear-gradient(135deg,#b01820,#183880);
+      --hero-glow: rgba(176,24,32,0.1);
+    }
+    .theme-stpatricks {
+      --bg: #060e04; --bg2: #0a1808; --bg3: #0e200c;
+      --accent: #28a030; --accent2: #d4a820; --accent3: #7ad070;
+      --text: #e8f8e0; --text-muted: #6a9860;
+      --card: #0a1808; --card2: #0e200c;
+      --nav-bg: rgba(6,14,4,0.94);
+      --border: rgba(40,160,48,0.32); --border2: rgba(40,160,48,0.12);
+      --shadow: rgba(40,160,48,0.22); --shadow2: rgba(40,160,48,0.08);
+      --btn-bg: #28a030; --btn-text: #fff;
+      --gradient: linear-gradient(135deg,#28a030,#d4a820);
+      --hero-glow: rgba(40,160,48,0.15);
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 1s ease, color 1s ease;
+    }
+    img { max-width: 100%; }
+    a { text-decoration: none; }
+
+    /* ===== PARTICLES ===== */
+    #particles-canvas {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    /* ===== HOLIDAY BANNER ===== */
+    #holidayBanner {
+      display: none;
+      background: var(--gradient);
+      color: #fff;
+      text-align: center;
+      padding: 0.65rem 1rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      position: relative;
+      z-index: 200;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px) saturate(180%);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: top 0.3s ease, background 0.6s ease;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.01em;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .nav-logo span { color: var(--text); }
+    .nav-links {
+      display: flex; gap: 2.2rem; list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      background: var(--btn-bg); color: var(--btn-text);
+      padding: 0.58rem 1.4rem; border-radius: 50px;
+      font-size: 0.82rem; font-weight: 600;
+      transition: all 0.3s; box-shadow: 0 4px 18px var(--shadow);
+    }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--shadow); }
+
+    /* Season pill */
+    .season-pill {
+      position: fixed; top: 78px; right: 18px;
+      background: var(--accent); color: var(--btn-text);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.3rem 0.85rem; border-radius: 30px;
+      z-index: 99; box-shadow: 0 4px 14px var(--shadow);
+      animation: popIn 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.4s both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0) rotate(-15deg); opacity: 0; }
+      to { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 130px 2rem 5rem;
+      position: relative; z-index: 1;
+      overflow: hidden;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: var(--hero-glow);
+      filter: blur(80px);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .hero-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      top: 50%; left: 50%;
+      pointer-events: none;
+      animation: rotateSlow var(--dur) linear infinite;
+    }
+    @keyframes rotateSlow {
+      from { transform: translate(-50%,-50%) rotate(0deg); }
+      to { transform: translate(-50%,-50%) rotate(360deg); }
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 1.6rem;
+      animation: fadeUp 0.9s ease 0.1s both;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.8rem, 9.5vw, 8rem);
+      font-weight: 600; line-height: 0.95;
+      letter-spacing: -0.02em; margin-bottom: 1.6rem;
+      animation: fadeUp 0.9s ease 0.25s both;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-sub {
+      font-size: 1.05rem; color: var(--text-muted);
+      max-width: 480px; line-height: 1.75;
+      margin-bottom: 2.8rem;
+      animation: fadeUp 0.9s ease 0.4s both;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeUp 0.9s ease 0.55s both;
+    }
+    .btn-primary {
+      background: var(--btn-bg); color: var(--btn-text);
+      padding: 0.95rem 2.4rem; border-radius: 50px;
+      font-size: 0.9rem; font-weight: 600;
+      transition: all 0.3s; box-shadow: 0 6px 28px var(--shadow);
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 40px var(--shadow); }
+    .btn-ghost {
+      border: 1.5px solid var(--border); color: var(--text);
+      padding: 0.95rem 2.4rem; border-radius: 50px;
+      font-size: 0.9rem; font-weight: 600;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .scroll-hint {
+      margin-top: 5rem; opacity: 0.35;
+      animation: fadeUp 1s ease 1s both, bounce 2.4s ease 2s infinite;
+      font-size: 1.4rem;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== STATS BAR ===== */
+    .stats-bar {
+      background: var(--gradient);
+      padding: 2.8rem 2rem; position: relative; z-index: 1;
+    }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; justify-content: space-around;
+      align-items: center; flex-wrap: wrap; gap: 2rem;
+    }
+    .stat { text-align: center; color: #fff; }
+    .stat-n {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.4rem; font-weight: 600; line-height: 1;
+      display: block;
+    }
+    .stat-l { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.88; }
+
+    /* ===== SECTION BASE ===== */
+    section { padding: 6.5rem 2rem; position: relative; z-index: 1; }
+    .container { max-width: 1160px; margin: 0 auto; }
+    .s-tag {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.8rem; display: block;
+    }
+    .s-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.1rem, 5vw, 3.6rem);
+      font-weight: 600; line-height: 1.08; margin-bottom: 1rem;
+    }
+    .s-title em { font-style: italic; color: var(--accent); }
+    .s-sub { color: var(--text-muted); font-size: 1rem; line-height: 1.75; max-width: 480px; }
+
+    /* ===== SERVICES ===== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 1.4rem; margin-top: 3.2rem;
+    }
+    .svc-card {
+      background: var(--card);
+      border: 1px solid var(--border2);
+      border-radius: 22px; padding: 2.4rem;
+      position: relative; overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .svc-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--gradient);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .svc-card:hover { transform: translateY(-9px); box-shadow: 0 22px 55px var(--shadow2); }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-icon { font-size: 2.4rem; margin-bottom: 1.2rem; display: block; }
+    .svc-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem; font-weight: 600; margin-bottom: 0.75rem;
+    }
+    .svc-desc { color: var(--text-muted); font-size: 0.88rem; line-height: 1.72; margin-bottom: 1.4rem; }
+    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+    .svc-list li {
+      font-size: 0.83rem; color: var(--text-muted);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .svc-list li::before { content: '✦'; color: var(--accent); font-size: 0.58rem; flex-shrink: 0; }
+    .svc-starting {
+      margin-top: 1.5rem; padding-top: 1.2rem;
+      border-top: 1px solid var(--border2);
+      font-size: 0.78rem; color: var(--text-muted);
+    }
+    .svc-starting strong {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: var(--accent); font-weight: 600;
+    }
+
+    /* ===== PRICING CALCULATOR ===== */
+    .pricing-section { background: var(--bg2); }
+    .pricing-wrap {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 3.5rem; align-items: start; margin-top: 3.2rem;
+    }
+    @media(max-width:960px){ .pricing-wrap{ grid-template-columns:1fr; } }
+    .calc-card {
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 24px; padding: 2.5rem;
+      position: sticky; top: 90px;
+    }
+    .calc-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; margin-bottom: 1.8rem;
+    }
+    .fg { margin-bottom: 1.4rem; }
+    .fl {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.55rem;
+    }
+    .fi {
+      width: 100%; padding: 0.82rem 1.15rem;
+      border: 1px solid var(--border);
+      border-radius: 12px; background: var(--bg);
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 0.92rem; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -webkit-appearance: none; appearance: none;
+    }
+    .fi:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--shadow2); }
+    .size-grid {
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0.45rem;
+    }
+    .szb {
+      padding: 0.7rem 0.4rem; border: 1px solid var(--border);
+      border-radius: 10px; background: var(--bg);
+      color: var(--text); font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; text-align: center;
+    }
+    .szb .lbs { display: block; font-size: 0.62rem; font-weight: 400; opacity: 0.65; margin-top: 0.15rem; }
+    .szb:hover, .szb.on {
+      background: var(--btn-bg); color: var(--btn-text);
+      border-color: var(--btn-bg); transform: scale(1.04);
+    }
+    .gen-btn {
+      width: 100%; padding: 1.05rem;
+      background: var(--gradient); color: #fff;
+      border: none; border-radius: 14px;
+      font-family: 'Outfit', sans-serif; font-size: 0.98rem; font-weight: 700;
+      cursor: pointer; transition: all 0.3s; margin-top: 0.4rem;
+      letter-spacing: 0.02em;
+    }
+    .gen-btn:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 10px 30px var(--shadow); }
+
+    /* Results area */
+    .results-area { min-height: 300px; }
+    .placeholder-box {
+      text-align: center; padding: 4rem 2rem;
+      background: var(--card); border: 2px dashed var(--border);
+      border-radius: 22px; color: var(--text-muted);
+    }
+    .placeholder-box .big-paw { font-size: 4.5rem; opacity: 0.25; margin-bottom: 1rem; display: block; }
+    .res-header {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.2rem;
+    }
+    .res-dog-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem; font-style: italic; font-weight: 400;
+    }
+    .res-badge {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em;
+      text-transform: uppercase; background: var(--accent);
+      color: var(--btn-text); padding: 0.28rem 0.8rem; border-radius: 20px;
+    }
+    .price-cards { display: flex; flex-direction: column; gap: 0.85rem; }
+    .pc {
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 16px; padding: 1.35rem 1.5rem;
+      display: flex; align-items: center; gap: 1.2rem;
+      transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      animation: slideRight 0.4s ease both;
+    }
+    @keyframes slideRight {
+      from { opacity:0; transform:translateX(22px); }
+      to { opacity:1; transform:translateX(0); }
+    }
+    .pc:hover { transform: translateX(6px); box-shadow: 0 8px 28px var(--shadow2); }
+    .pc-icon { font-size: 1.9rem; flex-shrink: 0; }
+    .pc-info { flex: 1; }
+    .pc-name { font-weight: 600; font-size: 0.92rem; margin-bottom: 0.18rem; }
+    .pc-desc { font-size: 0.78rem; color: var(--text-muted); }
+    .pc-price { text-align: right; }
+    .pc-amt {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.85rem; font-weight: 600; color: var(--accent); line-height: 1;
+    }
+    .pc-per { font-size: 0.65rem; color: var(--text-muted); margin-top: 0.1rem; }
+    .res-note {
+      margin-top: 1.2rem; padding: 1.1rem 1.3rem;
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 14px; font-size: 0.8rem;
+      color: var(--text-muted); line-height: 1.65;
+    }
+    .res-note strong { color: var(--accent); }
+    .res-book {
+      display: block; text-align: center; margin-top: 1rem;
+      padding: 1rem; background: var(--gradient); color: #fff;
+      border-radius: 14px; font-weight: 700; font-size: 0.95rem;
+      transition: all 0.3s;
+    }
+    .res-book:hover { opacity: 0.88; transform: translateY(-2px); }
+
+    /* ===== ABOUT ===== */
+    .about-wrap {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    @media(max-width:800px){ .about-wrap{ grid-template-columns:1fr; gap:2.5rem; } }
+    .about-visual-box {
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 28px; aspect-ratio: 4/3;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      font-size: 4.5rem; position: relative; overflow: visible;
+    }
+    .about-visual-box .sub-label {
+      font-family: 'Outfit', sans-serif; font-size: 0.85rem;
+      color: var(--text-muted); margin-top: 0.6rem;
+    }
+    .rating-chip {
+      position: absolute; bottom: -18px; right: -18px;
+      background: var(--btn-bg); color: var(--btn-text);
+      padding: 1rem 1.4rem; border-radius: 18px;
+      box-shadow: 0 10px 30px var(--shadow); line-height: 1.2;
+      text-align: center;
+    }
+    .rating-chip .big { font-family:'Cormorant Garamond',serif; font-size:2.6rem; font-weight:600; line-height:1; display:block; }
+    .rating-chip .sm { font-size:0.7rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+    .about-text p {
+      color: var(--text-muted); line-height: 1.82; font-size: 0.93rem; margin-bottom: 1.2rem;
+    }
+    .chips { display:flex; flex-wrap:wrap; gap:0.7rem; margin-top:2rem; }
+    .chip {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 30px; padding: 0.48rem 1.1rem;
+      font-size: 0.8rem; font-weight: 500;
+    }
+
+    /* ===== CTA ===== */
+    .cta-section { text-align: center; background: var(--bg3); }
+    .cta-section .s-title { margin: 0 auto 1.5rem; max-width: 580px; }
+    .cta-section > .container > p { color: var(--text-muted); margin-bottom: 2.5rem; font-size: 1rem; }
+    .cta-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+    .cta-meta {
+      margin-top: 2.2rem; font-size: 0.82rem;
+      color: var(--text-muted); letter-spacing: 0.02em;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border2);
+      padding: 2.8rem 2.5rem;
+    }
+    .foot-in {
+      max-width: 1160px; margin: 0 auto;
+      display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .foot-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; color: var(--accent); font-weight: 600;
+    }
+    .foot-links { display:flex; gap:1.8rem; list-style:none; }
+    .foot-links a { color:var(--text-muted); font-size:0.82rem; transition:color 0.2s; }
+    .foot-links a:hover { color:var(--accent); }
+    .foot-copy { font-size:0.78rem; color:var(--text-muted); }
+
+    /* ===== RESPONSIVE ===== */
+    @media(max-width:700px){
+      nav { padding: 0 1.2rem; }
+      .nav-links, .nav-cta { display:none; }
+      .hero h1 { font-size: clamp(2.8rem, 12vw, 5rem); }
+      section { padding: 4.5rem 1.2rem; }
+      .svc-card { padding: 1.8rem; }
+      .calc-card { padding: 1.8rem; }
+      .foot-in { flex-direction:column; text-align:center; }
+      .foot-links { justify-content:center; }
+    }
+
+    /* ===== THEME TRANSITION OVERLAY ===== */
+    .theme-overlay {
+      position: fixed; inset: 0; background: var(--bg);
+      z-index: 9999; opacity: 0; pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+    .reveal-up {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal-up.visible { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+<div class="theme-overlay" id="overlay"></div>
+
+<!-- Floating particles canvas -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Holiday banner -->
+<div id="holidayBanner"></div>
+
+<!-- Navigation -->
+<nav id="mainNav">
+  <div class="nav-logo">🐾 Pawfect <span>Days</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#pricing" class="nav-cta">Book Now</a>
+</nav>
+
+<!-- Season pill -->
+<div class="season-pill" id="seasonPill"></div>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-ring" style="width:520px;height:520px;--dur:35s"></div>
+  <div class="hero-ring" style="width:760px;height:760px;--dur:55s;animation-direction:reverse"></div>
+  <div class="hero-ring" style="width:980px;height:980px;--dur:80s"></div>
+
+  <div class="hero-eyebrow" id="heroEyebrow">✦ Premium Dog Care in Sanford, FL ✦</div>
+  <h1>Where Every <em>Tail</em><br>Tells a Story</h1>
+  <p class="hero-sub">Professional grooming, loving daycare & luxury boarding — because your pup deserves absolutely nothing but the best.</p>
+  <div class="hero-btns">
+    <a href="#pricing" class="btn-primary">🐾 Get a Quote</a>
+    <a href="#services" class="btn-ghost">Our Services</a>
+  </div>
+  <div class="scroll-hint">↓</div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><span class="stat-n">500+</span><span class="stat-l">Happy Pups</span></div>
+    <div class="stat"><span class="stat-n">8</span><span class="stat-l">Years of Care</span></div>
+    <div class="stat"><span class="stat-n">100%</span><span class="stat-l">Cage-Free Daycare</span></div>
+    <div class="stat"><span class="stat-n">24/7</span><span class="stat-l">Boarding Watch</span></div>
+  </div>
+</div>
+
+<!-- ===== SERVICES ===== -->
+<section id="services">
+  <div class="container">
+    <span class="s-tag">What We Offer</span>
+    <h2 class="s-title">Tailored <em>Care</em><br>for Every Breed</h2>
+    <p class="s-sub">From quick baths to overnight stays — our certified team provides personalized attention for every dog who walks through our door.</p>
+
+    <div class="services-grid">
+      <div class="svc-card reveal-up">
+        <span class="svc-icon">✂️</span>
+        <div class="svc-name">Grooming</div>
+        <p class="svc-desc">Professional grooming from express baths to full breed-specific styling. Your dog leaves looking and smelling absolutely amazing.</p>
+        <ul class="svc-list">
+          <li>Full bath, blow dry & brush out</li>
+          <li>Breed-specific styling & cuts</li>
+          <li>Nail trim, grind & paw balm</li>
+          <li>Ear cleaning & plucking</li>
+          <li>Teeth brushing add-on</li>
+          <li>Finish bow or bandana</li>
+        </ul>
+        <div class="svc-starting">Starting at <strong>$35</strong> &nbsp;·&nbsp; prices vary by size & coat</div>
+      </div>
+      <div class="svc-card reveal-up">
+        <span class="svc-icon">🌞</span>
+        <div class="svc-name">Daycare</div>
+        <p class="svc-desc">Cage-free, supervised play all day in our spacious indoor & outdoor yards. Full-day and half-day options to fit your schedule.</p>
+        <ul class="svc-list">
+          <li>Cage-free open play environment</li>
+          <li>Temperament-sorted playgroups</li>
+          <li>Structured play & nap rotations</li>
+          <li>Photo updates throughout the day</li>
+          <li>Fresh water & rest breaks</li>
+          <li>Full day (7AM–7PM) & half day</li>
+        </ul>
+        <div class="svc-starting">Starting at <strong>$35/day</strong> &nbsp;·&nbsp; half-day from $20</div>
+      </div>
+      <div class="svc-card reveal-up">
+        <span class="svc-icon">🏠</span>
+        <div class="svc-name">Boarding</div>
+        <p class="svc-desc">Overnight luxury boarding in cozy private suites. Your pup gets their own space, playtime with friends, and round-the-clock care.</p>
+        <ul class="svc-list">
+          <li>Private cozy suites (not crates)</li>
+          <li>3 walks + 2 outdoor play sessions</li>
+          <li>Bedtime tuck-in routine</li>
+          <li>24/7 on-site overnight supervision</li>
+          <li>Daily photo report cards sent to you</li>
+          <li>Complimentary exit bath available</li>
+        </ul>
+        <div class="svc-starting">Starting at <strong>$45/night</strong> &nbsp;·&nbsp; discounts for extended stays</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRICING CALCULATOR ===== -->
+<section id="pricing" class="pricing-section">
+  <div class="container">
+    <span class="s-tag">Instant Pricing</span>
+    <h2 class="s-title">Get Your <em>Custom</em><br>Price Quote</h2>
+    <p class="s-sub">Tell us about your dog and we'll instantly generate a personalized price list for every service — no guessing, no surprises.</p>
+
+    <div class="pricing-wrap">
+      <!-- Calculator Form -->
+      <div class="calc-card">
+        <div class="calc-title">🐶 Tell Us About Your Pup</div>
+
+        <div class="fg">
+          <label class="fl" for="dogName">Dog's Name</label>
+          <input type="text" class="fi" id="dogName" placeholder="e.g. Bella, Max, Luna...">
+        </div>
+        <div class="fg">
+          <label class="fl" for="dogBreed">Breed</label>
+          <input type="text" class="fi" id="dogBreed" placeholder="e.g. Golden Retriever, Poodle...">
+        </div>
+        <div class="fg">
+          <label class="fl" for="dogWeight">Weight (lbs)</label>
+          <input type="number" class="fi" id="dogWeight" placeholder="Enter weight in pounds" min="1" max="250" oninput="autoSize()">
+        </div>
+        <div class="fg">
+          <label class="fl">Size Category</label>
+          <div class="size-grid">
+            <button class="szb" data-s="small" onclick="pickSize(this)">Small<span class="lbs">Under 20 lb</span></button>
+            <button class="szb" data-s="medium" onclick="pickSize(this)">Medium<span class="lbs">20–50 lb</span></button>
+            <button class="szb" data-s="large" onclick="pickSize(this)">Large<span class="lbs">50–90 lb</span></button>
+            <button class="szb" data-s="xlarge" onclick="pickSize(this)">XL<span class="lbs">90+ lb</span></button>
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl" for="coatType">Coat Type</label>
+          <select class="fi" id="coatType">
+            <option value="short">Short / Smooth Coat</option>
+            <option value="medium" selected>Medium Coat</option>
+            <option value="long">Long / Double Coat</option>
+            <option value="curly">Curly / Doodle Coat</option>
+            <option value="wire">Wire / Terrier Coat</option>
+          </select>
+        </div>
+        <button class="gen-btn" onclick="generatePrices()">🐾 Generate My Price List</button>
+      </div>
+
+      <!-- Results -->
+      <div class="results-area" id="resultsArea">
+        <div class="placeholder-box">
+          <span class="big-paw">🐾</span>
+          <p style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">Your personalized quote is one click away!</p>
+          <p style="font-size:0.85rem">Fill in your dog's details and hit the button</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+  <div class="container">
+    <div class="about-wrap">
+      <div class="about-visual-box reveal-up">
+        🐶✂️🛁
+        <div class="sub-label">Certified & Loving</div>
+        <div class="rating-chip">
+          <span class="big">★ 4.9</span>
+          <span class="sm">Google Rating</span>
+        </div>
+      </div>
+      <div class="about-text reveal-up">
+        <span class="s-tag">Our Story</span>
+        <h2 class="s-title">Sanford's Most <em>Trusted</em> Dog Care</h2>
+        <p>We started Pawfect Days because we believe every dog deserves to be treated like family — even when their family is away. Our certified groomers and caretakers bring genuine love and professional expertise to every single visit.</p>
+        <p>Located right here in Sanford, FL, we've built our reputation on transparency, safety, and making tails wag. We keep class sizes small, our standards high, and our hearts fully committed to your furry family member.</p>
+        <div class="chips">
+          <span class="chip">✦ Certified Groomers</span>
+          <span class="chip">✦ Fear-Free Certified</span>
+          <span class="chip">✦ First Aid Trained</span>
+          <span class="chip">✦ Climate Controlled</span>
+          <span class="chip">✦ Fully Insured</span>
+          <span class="chip">✦ Sanford, FL Local</span>
+          <span class="chip">✦ All Breeds Welcome</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section" id="contact">
+  <div class="container">
+    <span class="s-tag">Ready to Book?</span>
+    <h2 class="s-title">Your Dog's <em>Best Day</em><br>Starts Here</h2>
+    <p>Call or text us to schedule your appointment — we'd love to meet your pup!</p>
+    <div class="cta-btns">
+      <a href="tel:+14075550123" class="btn-primary">📞 (407) 555-0123</a>
+      <a href="mailto:hello@pawfectdays.com" class="btn-ghost">✉ hello@pawfectdays.com</a>
+    </div>
+    <p class="cta-meta">📍 Sanford, FL &nbsp;·&nbsp; Open 7 Days a Week &nbsp;·&nbsp; 7AM – 7PM</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-logo">🐾 Pawfect Days</div>
+    <ul class="foot-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="foot-copy">© 2026 Pawfect Days &nbsp;·&nbsp; Sanford, FL</div>
+  </div>
+</footer>
+
+<script>
+/* =========================================
+   THEME DETECTION
+   ========================================= */
+function getThemeInfo() {
+  const now = new Date();
+  const m = now.getMonth() + 1; // 1-12
+  const d = now.getDate();
+
+  // Priority: holidays first
+  // Christmas: Dec 1–25
+  if (m === 12 && d <= 25)
+    return { cls: 'christmas', pill: '🎄 Christmas Season', banner: '🎄 Holiday Special: 15% off boarding in December! Book early — spots fill fast! 🎁' };
+  // New Year's Eve/Day
+  if ((m === 12 && d > 25) || (m === 1 && d <= 3))
+    return { cls: 'winter', pill: '🎆 New Year!', banner: '🥂 New Year Offer: First-time grooming 10% off all of January!' };
+  // Valentine's: Feb 10–14
+  if (m === 2 && d >= 10 && d <= 14)
+    return { cls: 'valentines', pill: '💕 Valentine\'s Week', banner: '💕 Puppy Love Package: Bath + Heart Bandana — Available this week only! 🌹' };
+  // St. Patrick's: Mar 13–17
+  if (m === 3 && d >= 13 && d <= 17)
+    return { cls: 'stpatricks', pill: '☘️ St. Patrick\'s Day', banner: '☘️ Lucky Pup Special: Book any groom & get a free nail trim this week! 🍀' };
+  // Independence Day: Jul 1–4
+  if (m === 7 && d <= 4)
+    return { cls: 'independence', pill: '🇺🇸 Independence Day', banner: '🎆 Red, White & Paws Special: 10% off all grooming July 1–4! 🇺🇸' };
+  // Halloween: Oct 15–31
+  if (m === 10 && d >= 15)
+    return { cls: 'halloween', pill: '🎃 Spooky Season', banner: '🎃 Halloween Special: Costume-friendly grooming available — book your spooky pup! 🕷️' };
+  // Thanksgiving: Nov 20–27 (approx)
+  if (m === 11 && d >= 20 && d <= 27)
+    return { cls: 'fall', pill: '🦃 Thanksgiving Week', banner: '🦃 Pre-holiday boarding available — guaranteed spot for your pup while you travel! 🍂' };
+
+  // Seasons
+  // Spring: Mar 20 – Jun 20
+  if ((m === 3 && d >= 20) || m === 4 || m === 5 || (m === 6 && d <= 20))
+    return { cls: 'spring', pill: '🌸 Spring', banner: null };
+  // Summer: Jun 21 – Sep 22
+  if ((m === 6 && d >= 21) || m === 7 || m === 8 || (m === 9 && d <= 22))
+    return { cls: 'summer', pill: '☀️ Summer', banner: null };
+  // Fall: Sep 23 – Dec 20
+  if ((m === 9 && d >= 23) || m === 10 || m === 11 || (m === 12 && d <= 20))
+    return { cls: 'fall', pill: '🍂 Autumn', banner: null };
+  // Winter: Dec 26 – Mar 19
+  return { cls: 'winter', pill: '❄️ Winter', banner: null };
+}
+
+const themeInfo = getThemeInfo();
+document.body.classList.add('theme-' + themeInfo.cls);
+document.getElementById('seasonPill').textContent = themeInfo.pill;
+
+if (themeInfo.banner) {
+  const b = document.getElementById('holidayBanner');
+  b.textContent = themeInfo.banner;
+  b.style.display = 'block';
+  document.getElementById('mainNav').style.top = b.offsetHeight + 'px';
+  document.getElementById('seasonPill').style.top = (80 + b.offsetHeight) + 'px';
+}
+
+/* Hero eyebrow seasonal text */
+const eyebrows = {
+  spring: '✦ Spring Grooming Specials Available ✦',
+  summer: '✦ Summer Cool-Down Packages Available ✦',
+  fall: '✦ Cozy Fall Boarding Now Open ✦',
+  winter: '✦ Holiday Boarding — Reserve Your Spot ✦',
+  halloween: '✦ Spooky Season Grooming is Here! ✦',
+  christmas: '✦ Holiday Specials — Book Early! ✦',
+  valentines: '✦ Puppy Love Packages This Week ✦',
+  stpatricks: '✦ Lucky Pup Specials This Week ✦',
+  independence: '✦ Red, White & Paws — 4th of July Special ✦',
+};
+if (eyebrows[themeInfo.cls]) {
+  document.getElementById('heroEyebrow').textContent = eyebrows[themeInfo.cls];
+}
+
+/* =========================================
+   PARTICLE SYSTEM
+   ========================================= */
+const PARTICLES = {
+  spring:       ['🌸','🌺','🌷','✿','🌼','🌱'],
+  summer:       ['☀️','🌊','🌻','⭐','🐚','🌴'],
+  fall:         ['🍂','🍁','🍃','🌰','🍄'],
+  winter:       ['❄️','⛄','✨','🌟','💎','🔷'],
+  halloween:    ['🎃','🕷️','🦇','👻','🕸️'],
+  christmas:    ['❄️','⭐','🎄','✨','🎁','🔔'],
+  valentines:   ['💕','💝','💖','🌹','💗'],
+  stpatricks:   ['☘️','🍀','🌟','💚'],
+  independence: ['⭐','🎆','✨','🔵','🔴'],
+};
+
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resizeCanvas() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+const emojis = PARTICLES[themeInfo.cls] || ['🐾'];
+class Particle {
+  constructor() { this.reset(true); }
+  reset(init) {
+    this.x = Math.random() * W;
+    this.y = init ? Math.random() * H : -30;
+    this.size = 12 + Math.random() * 14;
+    this.speed = 0.5 + Math.random() * 1.2;
+    this.drift = (Math.random() - 0.5) * 0.8;
+    this.rot = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.04;
+    this.opacity = 0.2 + Math.random() * 0.5;
+    this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+  }
+  update() {
+    this.y += this.speed;
+    this.x += this.drift;
+    this.rot += this.rotSpeed;
+    if (this.y > H + 30) this.reset(false);
+  }
+  draw() {
+    ctx.save();
+    ctx.globalAlpha = this.opacity;
+    ctx.font = this.size + 'px serif';
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rot);
+    ctx.fillText(this.emoji, -this.size / 2, this.size / 2);
+    ctx.restore();
+  }
+}
+
+for (let i = 0; i < 22; i++) particles.push(new Particle());
+
+(function animate() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animate);
+})();
+
+/* =========================================
+   SCROLL REVEAL
+   ========================================= */
+const ro = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) e.target.classList.add('visible');
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal-up').forEach(el => ro.observe(el));
+
+/* =========================================
+   PRICING LOGIC
+   ========================================= */
+let curSize = null;
+
+function pickSize(btn) {
+  document.querySelectorAll('.szb').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  curSize = btn.dataset.s;
+}
+
+function autoSize() {
+  const w = parseFloat(document.getElementById('dogWeight').value);
+  if (isNaN(w)) return;
+  const s = w < 20 ? 'small' : w < 50 ? 'medium' : w < 90 ? 'large' : 'xlarge';
+  document.querySelectorAll('.szb').forEach(b => {
+    const on = b.dataset.s === s;
+    b.classList.toggle('on', on);
+  });
+  curSize = s;
+}
+
+const PRICES = {
+  small:  { bath:35, groom:55, nails:15, dayF:35, dayH:20, board:45, long:8,  curly:12, wire:8  },
+  medium: { bath:50, groom:75, nails:15, dayF:42, dayH:25, board:55, long:14, curly:20, wire:14 },
+  large:  { bath:70, groom:95, nails:20, dayF:50, dayH:30, board:65, long:20, curly:28, wire:20 },
+  xlarge: { bath:90, groom:125,nails:25, dayF:60, dayH:35, board:80, long:28, curly:38, wire:28 },
+};
+const SIZE_LABELS = { small:'Small', medium:'Medium', large:'Large', xlarge:'Extra Large' };
+
+function generatePrices() {
+  const name   = document.getElementById('dogName').value.trim() || 'Your Pup';
+  const breed  = document.getElementById('dogBreed').value.trim();
+  const weight = document.getElementById('dogWeight').value;
+  const coat   = document.getElementById('coatType').value;
+
+  // auto-detect size from weight if not selected
+  if (!curSize && weight) {
+    const w = parseFloat(weight);
+    curSize = w < 20 ? 'small' : w < 50 ? 'medium' : w < 90 ? 'large' : 'xlarge';
+    document.querySelectorAll('.szb').forEach(b => {
+      b.classList.toggle('on', b.dataset.s === curSize);
+    });
+  }
+
+  if (!curSize) {
+    alert('Please select a size or enter a weight!');
+    return;
+  }
+
+  const p = PRICES[curSize];
+  const coatExtra = { long: p.long, curly: p.curly, wire: p.wire }[coat] || 0;
+  const coatNote = coatExtra > 0 ? ` + $${coatExtra} coat surcharge` : '';
+  const wStr = weight ? ` · ${weight} lbs` : '';
+  const bStr = breed ? ` — ${breed}` : '';
+
+  const services = [
+    { icon:'🛁', name:'Bath & Brush Out', desc:'Full bath, blow dry, brush & fresh spritz', amt: p.bath, per:'per visit' },
+    { icon:'✂️', name:'Full Groom (Haircut)', desc:`Bath + breed-specific styling${coatNote}`, amt: p.groom + coatExtra, per:'per visit' },
+    { icon:'💅', name:'Nail Trim & Grind', desc:'Clip, file & soothing paw balm', amt: p.nails, per:'per visit' },
+    { icon:'🌞', name:'Daycare — Full Day', desc:'Cage-free play 7AM–7PM with rest breaks', amt: p.dayF, per:'per day' },
+    { icon:'🌤️', name:'Daycare — Half Day', desc:'Up to 5 hours of supervised play', amt: p.dayH, per:'per half day' },
+    { icon:'🌙', name:'Overnight Boarding', desc:'Private suite, 3 walks & bedtime tuck-in', amt: p.board, per:'per night' },
+  ];
+
+  let html = `
+    <div class="res-header">
+      <div class="res-dog-name">${name}${bStr}</div>
+      <div class="res-badge">${SIZE_LABELS[curSize]}${wStr}</div>
+    </div>
+    <div class="price-cards">
+  `;
+
+  services.forEach((s, i) => {
+    html += `
+      <div class="pc" style="animation-delay:${i * 0.07}s">
+        <div class="pc-icon">${s.icon}</div>
+        <div class="pc-info">
+          <div class="pc-name">${s.name}</div>
+          <div class="pc-desc">${s.desc}</div>
+        </div>
+        <div class="pc-price">
+          <div class="pc-amt">$${s.amt}</div>
+          <div class="pc-per">${s.per}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  html += `</div>
+    <div class="res-note">
+      <strong>📌 Good to know:</strong> These are estimates based on size & coat type. Final pricing confirmed at drop-off after a quick coat check. Multi-dog households get 10% off! Ask about our loyalty punch card — <strong>every 6th groom is FREE</strong> 🐾
+    </div>
+    <a href="#contact" class="res-book">Book an Appointment →</a>
+  `;
+
+  const area = document.getElementById('resultsArea');
+  area.innerHTML = html;
+
+  // Scroll results into view on mobile
+  if (window.innerWidth < 960) {
+    setTimeout(() => area.scrollIntoView({ behavior:'smooth', block:'start' }), 100);
+  }
+}
+</script>
+</body>
+</html>
