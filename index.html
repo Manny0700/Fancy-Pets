@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pawfect Days — Premium Dog Care</title>
+  <title>Fancy Pets — Premium Dog Care</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ===== THEME VARIABLES ===== */
@@ -370,25 +370,27 @@
     }
 
     /* ===== GALLERY ===== */
-    .gallery-section { background: var(--bg); }
+    .gallery-section { background: var(--bg2); }
     .gallery-grid {
-      columns: 3; gap: 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem;
       margin-top: 3.2rem;
     }
-    @media(max-width:900px){ .gallery-grid{ columns: 2; } }
-    @media(max-width:500px){ .gallery-grid{ columns: 1; } }
+    @media(max-width:900px){ .gallery-grid{ grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:500px){ .gallery-grid{ grid-template-columns: 1fr; } }
     .gallery-item {
-      break-inside: avoid;
-      margin-bottom: 1.2rem;
       border-radius: 18px;
       overflow: hidden;
       position: relative;
       cursor: pointer;
       background: var(--card);
       border: 1px solid var(--border2);
+      aspect-ratio: 4/3;
     }
     .gallery-item img {
-      width: 100%; display: block;
+      width: 100%; height: 100%; display: block;
+      object-fit: cover;
       transition: transform 0.5s cubic-bezier(0.34,1.2,0.64,1);
     }
     .gallery-item:hover img { transform: scale(1.06); }
@@ -403,6 +405,29 @@
       color: #fff; font-size: 0.82rem; font-weight: 600;
       letter-spacing: 0.04em;
     }
+    /* Inline photo strips */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.4rem;
+      margin-top: 3rem;
+    }
+    @media(max-width:700px){ .photo-strip{ grid-template-columns: 1fr; } }
+    .photo-strip-item {
+      border-radius: 18px; overflow: hidden;
+      aspect-ratio: 16/10; position: relative; cursor: pointer;
+      border: 1px solid var(--border2);
+    }
+    .photo-strip-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.5s cubic-bezier(0.34,1.2,0.64,1);
+    }
+    .photo-strip-item:hover img { transform: scale(1.05); }
+    .photo-strip-item .gallery-overlay { position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s ease;
+      display: flex; align-items: flex-end; padding: 1.2rem; }
+    .photo-strip-item:hover .gallery-overlay { opacity: 1; }
     .lightbox {
       position: fixed; inset: 0; z-index: 9998;
       background: rgba(0,0,0,0.92);
@@ -658,7 +683,7 @@
 
 <!-- Navigation -->
 <nav id="mainNav">
-  <div class="nav-logo">🐾 Pawfect <span>Days</span></div>
+  <div class="nav-logo">🐾 Fancy <span>Pets</span></div>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#gallery">Gallery</a></li>
@@ -759,30 +784,19 @@
     <span class="s-tag">Our Happy Pups</span>
     <h2 class="s-title">A Peek Inside <em>Fancy Pets</em></h2>
     <p class="s-sub">Real moments from our salon, daycare & boarding — where every pup is treated like royalty.</p>
-
     <div class="gallery-grid">
-
       <div class="gallery-item reveal-up" onclick="openLightbox(this)">
         <img src="dog1.png" alt="Happy pup being groomed at Fancy Pets" loading="lazy">
-        <div class="gallery-overlay">
-          <span class="gallery-caption">Looking fresh ✨</span>
-        </div>
+        <div class="gallery-overlay"><span class="gallery-caption">Looking fresh ✨</span></div>
       </div>
-
       <div class="gallery-item reveal-up" onclick="openLightbox(this)">
         <img src="dog2.png" alt="Playful pup at Fancy Pets daycare" loading="lazy">
-        <div class="gallery-overlay">
-          <span class="gallery-caption">Playtime fun 🐾</span>
-        </div>
+        <div class="gallery-overlay"><span class="gallery-caption">Playtime fun 🐾</span></div>
       </div>
-
       <div class="gallery-item reveal-up" onclick="openLightbox(this)">
         <img src="dog3.png" alt="Adorable pup at Fancy Pets" loading="lazy">
-        <div class="gallery-overlay">
-          <span class="gallery-caption">Spa day vibes 🛁</span>
-        </div>
+        <div class="gallery-overlay"><span class="gallery-caption">Spa day vibes 🛁</span></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -866,7 +880,7 @@
       <div class="about-text reveal-up">
         <span class="s-tag">Our Story</span>
         <h2 class="s-title">Lake Mary's Most <em>Trusted</em> Dog Care</h2>
-        <p>We started Pawfect Days because we believe every dog deserves to be treated like family — even when their family is away. Our certified groomers and caretakers bring genuine love and professional expertise to every single visit.</p>
+        <p>We started Fancy Pets because we believe every dog deserves to be treated like family — even when their family is away. Our certified groomers and caretakers bring genuine love and professional expertise to every single visit.</p>
         <p>Located right here in Lake Mary, FL, we've built our reputation on transparency, safety, and making tails wag. We keep class sizes small, our standards high, and our hearts fully committed to your furry family member.</p>
         <div class="chips">
           <span class="chip">✦ Certified Groomers</span>
@@ -882,6 +896,20 @@
   </div>
 </section>
 
+<!-- Photo strip between about and CTA -->
+<div style="padding: 0 2rem 4rem; max-width:1160px; margin:0 auto;">
+  <div class="photo-strip">
+    <div class="photo-strip-item reveal-up" onclick="openLightbox(this)">
+      <img src="dog2.png" alt="Happy dogs at Fancy Pets daycare" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Daycare adventures 🌞</span></div>
+    </div>
+    <div class="photo-strip-item reveal-up" onclick="openLightbox(this)">
+      <img src="dog3.png" alt="Bath time at Fancy Pets" loading="lazy">
+      <div class="gallery-overlay"><span class="gallery-caption">Bubble bath time 🛁</span></div>
+    </div>
+  </div>
+</div>
+
 <!-- ===== CTA ===== -->
 <section class="cta-section" id="contact">
   <div class="container">
@@ -890,7 +918,7 @@
     <p>Call or text us to schedule your appointment — we'd love to meet your pup!</p>
     <div class="cta-btns">
       <a href="tel:+14078333880" class="btn-primary">📞 (407) 833-3880</a>
-      <a href="mailto:hello@pawfectdays.com" class="btn-ghost">✉ hello@pawfectdays.com</a>
+      <a href="mailto:fancypetsfl@gmail.com" class="btn-ghost">✉ fancypetsfl@gmail.com</a>
     </div>
     <p class="cta-meta">📍 870 S Sun Drive Suite 1054, Lake Mary, FL 32746 &nbsp;·&nbsp; Mon–Sat 7AM–6PM &nbsp;·&nbsp; Sun 9AM–5PM</p>
   </div>
@@ -899,7 +927,7 @@
 <!-- Footer -->
 <footer>
   <div class="foot-in">
-    <div class="foot-logo">🐾 Pawfect Days</div>
+    <div class="foot-logo">🐾 Fancy Pets</div>
     <ul class="foot-links">
       <li><a href="#services">Services</a></li>
       <li><a href="#gallery">Gallery</a></li>
@@ -907,7 +935,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="foot-copy">© 2026 Pawfect Days &nbsp;·&nbsp; Lake Mary, FL</div>
+    <div class="foot-copy">© 2026 Fancy Pets &nbsp;·&nbsp; Lake Mary, FL</div>
   </div>
 </footer>
 
