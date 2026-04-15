@@ -846,8 +846,7 @@ function getThemeInfo() {
   return { cls: 'winter', pill: '❄️ Winter', banner: null };
 }
 
-const themeInfo = { cls: 'christmas', pill: '🎄 Christmas Season', banner: null };document.body.classList.add('theme-' + themeInfo.cls);
-document.getElementById('seasonPill').textContent = themeInfo.pill;
+const themeInfo = { cls: 'winter', pill: '❄️ Winter', banner: null };document.getElementById('seasonPill').textContent = themeInfo.pill;
 
 if (themeInfo.banner) {
   const b = document.getElementById('holidayBanner');
