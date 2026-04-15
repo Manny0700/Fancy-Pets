@@ -846,7 +846,7 @@ function getThemeInfo() {
   return { cls: 'winter', pill: '❄️ Winter', banner: null };
 }
 
-const themeInfo = getThemeInfo();
+const themeInfo = { cls: 'summer', pill: '☀️ Summer', banner: null };
 document.body.classList.add('theme-' + themeInfo.cls);
 document.getElementById('seasonPill').textContent = themeInfo.pill;
 
