@@ -466,22 +466,12 @@
 
     /* ===== PRICING CALCULATOR ===== */
     .pricing-section { background: var(--bg2); }
-    .pricing-wrap {
-      display: grid;
-      grid-template-columns: 420px 1fr;
-      gap: 3.5rem; align-items: start; margin-top: 3.2rem;
+    .breed-search-wrap { margin-top: 3.2rem; }
+    .breed-controls {
+      display: grid; grid-template-columns: 1fr 1fr auto;
+      gap: 1rem; margin-bottom: 1.5rem; align-items: end;
     }
-    @media(max-width:960px){ .pricing-wrap{ grid-template-columns:1fr; } }
-    .calc-card {
-      background: var(--card); border: 1px solid var(--border2);
-      border-radius: 24px; padding: 2.5rem;
-      position: sticky; top: 90px;
-    }
-    .calc-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem; font-weight: 600; margin-bottom: 1.8rem;
-    }
-    .fg { margin-bottom: 1.4rem; }
+    @media(max-width:680px){ .breed-controls{ grid-template-columns:1fr; } }
     .fl {
       display: block; font-size: 0.72rem; font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase;
@@ -497,89 +487,97 @@
       -webkit-appearance: none; appearance: none;
     }
     .fi:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--shadow2); }
-    .size-grid {
-      display: grid; grid-template-columns: repeat(4,1fr); gap: 0.45rem;
+    .breed-input-wrap { position: relative; }
+    .breed-dropdown {
+      position: absolute; top: calc(100% + 4px); left: 0; right: 0;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; z-index: 50; max-height: 240px;
+      overflow-y: auto; box-shadow: 0 12px 40px var(--shadow2);
+      display: none;
     }
-    .szb {
-      padding: 0.7rem 0.4rem; border: 1px solid var(--border);
-      border-radius: 10px; background: var(--bg);
-      color: var(--text); font-family: 'Outfit', sans-serif;
-      font-size: 0.78rem; font-weight: 600;
+    .breed-dropdown.open { display: block; }
+    .breed-opt {
+      padding: 0.72rem 1.15rem; cursor: pointer;
+      font-size: 0.88rem; border-bottom: 1px solid var(--border2);
+      transition: background 0.15s;
+    }
+    .breed-opt:last-child { border-bottom: none; }
+    .breed-opt:hover, .breed-opt.active { background: var(--bg2); color: var(--accent); }
+    .gender-btns { display: flex; gap: 0.5rem; }
+    .genbtn {
+      flex: 1; padding: 0.82rem; border: 1px solid var(--border);
+      border-radius: 12px; background: var(--bg); color: var(--text);
+      font-family: 'Outfit', sans-serif; font-size: 0.85rem; font-weight: 600;
       cursor: pointer; transition: all 0.2s; text-align: center;
     }
-    .szb .lbs { display: block; font-size: 0.62rem; font-weight: 400; opacity: 0.65; margin-top: 0.15rem; }
-    .szb:hover, .szb.on {
-      background: var(--btn-bg); color: var(--btn-text);
-      border-color: var(--btn-bg); transform: scale(1.04);
-    }
+    .genbtn.on { background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); }
     .gen-btn {
-      width: 100%; padding: 1.05rem;
+      width: 100%; padding: 0.95rem;
       background: var(--gradient); color: #fff;
-      border: none; border-radius: 14px;
-      font-family: 'Outfit', sans-serif; font-size: 0.98rem; font-weight: 700;
-      cursor: pointer; transition: all 0.3s; margin-top: 0.4rem;
-      letter-spacing: 0.02em;
+      border: none; border-radius: 12px;
+      font-family: 'Outfit', sans-serif; font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; transition: all 0.3s;
+      letter-spacing: 0.02em; white-space: nowrap;
     }
     .gen-btn:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 10px 30px var(--shadow); }
-
-    /* Results area */
-    .results-area { min-height: 300px; }
     .placeholder-box {
       text-align: center; padding: 4rem 2rem;
       background: var(--card); border: 2px dashed var(--border);
       border-radius: 22px; color: var(--text-muted);
     }
     .placeholder-box .big-paw { font-size: 4.5rem; opacity: 0.25; margin-bottom: 1rem; display: block; }
+    /* Results */
+    .price-result-wrap { animation: fadeUp 0.4s ease both; }
     .res-header {
       display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1.2rem;
+      flex-wrap: wrap; gap: 0.8rem; margin-bottom: 0.5rem;
     }
-    .res-dog-name {
+    .res-breed-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.65rem; font-style: italic; font-weight: 400;
+      font-size: 2rem; font-style: italic; font-weight: 400;
     }
-    .res-badge {
-      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.07em;
-      text-transform: uppercase; background: var(--accent);
-      color: var(--btn-text); padding: 0.28rem 0.8rem; border-radius: 20px;
+    .res-meta { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .price-table {
+      width: 100%; border-collapse: collapse;
+      background: var(--card); border-radius: 18px;
+      overflow: hidden; border: 1px solid var(--border2);
     }
-    .price-cards { display: flex; flex-direction: column; gap: 0.85rem; }
-    .pc {
-      background: var(--card); border: 1px solid var(--border2);
-      border-radius: 16px; padding: 1.35rem 1.5rem;
-      display: flex; align-items: center; gap: 1.2rem;
-      transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1);
-      animation: slideRight 0.4s ease both;
+    .price-table th {
+      background: var(--gradient); color: #fff;
+      padding: 1rem 1.2rem; font-size: 0.78rem;
+      font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; text-align: left;
     }
-    @keyframes slideRight {
-      from { opacity:0; transform:translateX(22px); }
-      to { opacity:1; transform:translateX(0); }
+    .price-table td {
+      padding: 1rem 1.2rem; border-bottom: 1px solid var(--border2);
+      font-size: 0.9rem;
     }
-    .pc:hover { transform: translateX(6px); box-shadow: 0 8px 28px var(--shadow2); }
-    .pc-icon { font-size: 1.9rem; flex-shrink: 0; }
-    .pc-info { flex: 1; }
-    .pc-name { font-weight: 600; font-size: 0.92rem; margin-bottom: 0.18rem; }
-    .pc-desc { font-size: 0.78rem; color: var(--text-muted); }
-    .pc-price { text-align: right; }
-    .pc-amt {
+    .price-table tr:last-child td { border-bottom: none; }
+    .price-table tr:hover td { background: var(--bg2); }
+    .price-table .svc-label { font-weight: 600; }
+    .price-table .svc-desc { font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 0.15rem; }
+    .price-table .price-amt {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.85rem; font-weight: 600; color: var(--accent); line-height: 1;
+      font-size: 1.6rem; font-weight: 600; color: var(--accent);
     }
-    .pc-per { font-size: 0.65rem; color: var(--text-muted); margin-top: 0.1rem; }
-    .res-note {
-      margin-top: 1.2rem; padding: 1.1rem 1.3rem;
+    .addon-note {
+      margin-top: 1rem; padding: 1rem 1.2rem;
       background: var(--card); border: 1px solid var(--border2);
-      border-radius: 14px; font-size: 0.8rem;
-      color: var(--text-muted); line-height: 1.65;
+      border-left: 3px solid var(--accent);
+      border-radius: 12px; font-size: 0.82rem; color: var(--text-muted);
     }
-    .res-note strong { color: var(--accent); }
+    .addon-note strong { color: var(--accent); }
     .res-book {
-      display: block; text-align: center; margin-top: 1rem;
+      display: block; text-align: center; margin-top: 1.2rem;
       padding: 1rem; background: var(--gradient); color: #fff;
       border-radius: 14px; font-weight: 700; font-size: 0.95rem;
       transition: all 0.3s;
     }
     .res-book:hover { opacity: 0.88; transform: translateY(-2px); }
+    @keyframes slideRight {
+      from { opacity:0; transform:translateX(22px); }
+      to { opacity:1; transform:translateX(0); }
+    }
 
     /* ===== ABOUT ===== */
     .about-wrap {
@@ -811,54 +809,37 @@
 <section id="pricing" class="pricing-section">
   <div class="container">
     <span class="s-tag">Instant Pricing</span>
-    <h2 class="s-title">Get Your <em>Custom</em><br>Price Quote</h2>
-    <p class="s-sub">Tell us about your dog and we'll instantly generate a personalized price list for every service — no guessing, no surprises.</p>
+    <h2 class="s-title">Search by <em>Breed</em><br>Get Exact Prices</h2>
+    <p class="s-sub">Type your dog's breed below and select their gender — we'll pull up exact grooming prices from our full pricing matrix instantly.</p>
 
-    <div class="pricing-wrap">
-      <!-- Calculator Form -->
-      <div class="calc-card">
-        <div class="calc-title">🐶 Tell Us About Your Pup</div>
-
-        <div class="fg">
-          <label class="fl" for="dogName">Dog's Name</label>
-          <input type="text" class="fi" id="dogName" placeholder="e.g. Bella, Max, Luna...">
-        </div>
-        <div class="fg">
-          <label class="fl" for="dogBreed">Breed</label>
-          <input type="text" class="fi" id="dogBreed" placeholder="e.g. Golden Retriever, Poodle...">
-        </div>
-        <div class="fg">
-          <label class="fl" for="dogWeight">Weight (lbs)</label>
-          <input type="number" class="fi" id="dogWeight" placeholder="Enter weight in pounds" min="1" max="250" oninput="autoSize()">
-        </div>
-        <div class="fg">
-          <label class="fl">Size Category</label>
-          <div class="size-grid">
-            <button class="szb" data-s="small" onclick="pickSize(this)">Small<span class="lbs">Under 20 lb</span></button>
-            <button class="szb" data-s="medium" onclick="pickSize(this)">Medium<span class="lbs">20–50 lb</span></button>
-            <button class="szb" data-s="large" onclick="pickSize(this)">Large<span class="lbs">50–90 lb</span></button>
-            <button class="szb" data-s="xlarge" onclick="pickSize(this)">XL<span class="lbs">90+ lb</span></button>
+    <div class="breed-search-wrap">
+      <div class="breed-controls">
+        <div>
+          <label class="fl">Dog's Breed</label>
+          <div class="breed-input-wrap">
+            <input type="text" class="fi" id="breedSearch" placeholder="Type a breed, e.g. Golden Retriever..." autocomplete="off"
+              oninput="filterBreeds()" onkeydown="breedKeyNav(event)" onfocus="showDropdown()">
+            <div class="breed-dropdown" id="breedDropdown"></div>
           </div>
         </div>
-        <div class="fg">
-          <label class="fl" for="coatType">Coat Type</label>
-          <select class="fi" id="coatType">
-            <option value="short">Short / Smooth Coat</option>
-            <option value="medium" selected>Medium Coat</option>
-            <option value="long">Long / Double Coat</option>
-            <option value="curly">Curly / Doodle Coat</option>
-            <option value="wire">Wire / Terrier Coat</option>
-          </select>
+        <div>
+          <label class="fl">Gender</label>
+          <div class="gender-btns">
+            <button class="genbtn on" id="genM" onclick="selectGender('m')">♂ Male</button>
+            <button class="genbtn" id="genF" onclick="selectGender('f')">♀ Female</button>
+          </div>
         </div>
-        <button class="gen-btn" onclick="generatePrices()">🐾 Generate My Price List</button>
+        <div>
+          <label class="fl">&nbsp;</label>
+          <button class="gen-btn" onclick="lookupBreed()">🐾 Get My Price</button>
+        </div>
       </div>
 
-      <!-- Results -->
-      <div class="results-area" id="resultsArea">
+      <div id="priceResult">
         <div class="placeholder-box">
           <span class="big-paw">🐾</span>
-          <p style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">Your personalized quote is one click away!</p>
-          <p style="font-size:0.85rem">Fill in your dog's details and hit the button</p>
+          <p style="font-size:1.1rem;font-weight:700;margin-bottom:0.5rem">Search your breed above for exact pricing!</p>
+          <p style="font-size:0.85rem">Over 200 breeds in our database — type to search</p>
         </div>
       </div>
     </div>
@@ -1075,107 +1056,136 @@ const ro = new IntersectionObserver(entries => {
 document.querySelectorAll('.reveal-up').forEach(el => ro.observe(el));
 
 /* =========================================
-   PRICING LOGIC
+   BREED PRICING LOOKUP
    ========================================= */
-let curSize = null;
+const BREED_PRICES = [{"breed":"Affenpinschers","male_wt":"7-10 pounds","female_wt":"7-10 pounds","coat":"Medium","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Afghan Hounds","male_wt":"50-60 pounds","female_wt":"50-60 pounds","coat":"Long","groom_m":"105","mini_m":"75","bath_m":"55","groom_f":"105","mini_f":"65","bath_f":"40"},{"breed":"Airedale Terriers","male_wt":"50-70 pounds","female_wt":"50-70 pounds","coat":"Medium","groom_m":"105","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Akitas","male_wt":"100-130 pounds","female_wt":"70-100 pounds","coat":"Medium","groom_m":"125","mini_m":"95","bath_m":"75","groom_f":"105","mini_f":"85","bath_f":"60"},{"breed":"Alaskan Malamutes","male_wt":"85 pounds","female_wt":"75 pounds","coat":"Medium","groom_m":"105","mini_m":"85","bath_m":"60","groom_f":"105","mini_f":"75","bath_f":"50"},{"breed":"American English Coonhounds","male_wt":"45-65 pounds","female_wt":"45-65 pounds","coat":"Short","groom_m":"90","mini_m":"65","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"40"},{"breed":"American Eskimo Dogs - miniature","male_wt":"10-20 pounds","female_wt":"10-20 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"American Eskimo Dogs - standard","male_wt":"25-35 pounds","female_wt":"25-35 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"American Eskimo Dogs - toy","male_wt":"6-10 pounds","female_wt":"6-10 pounds","coat":"Medium","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"American Foxhounds","male_wt":"65-70 pounds","female_wt":"60-65 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Anatolian Shepherd Dogs","male_wt":"110-150 pounds","female_wt":"80-120 pounds","coat":"Medium","groom_m":"130","mini_m":"100","bath_m":"85","groom_f":"120","mini_f":"90","bath_f":"65"},{"breed":"Australian Cattle Dogs","male_wt":"35-50 pounds","female_wt":"35-50 pounds","coat":"Medium","groom_m":"85","mini_m":"60","bath_m":"40","groom_f":"85","mini_f":"60","bath_f":"40"},{"breed":"Australian Shepherds","male_wt":"50-65 pounds","female_wt":"40-55 pounds","coat":"Medium","groom_m":"90","mini_m":"65","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Australian Terriers","male_wt":"15-20 pounds","female_wt":"15-20 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Basenjis","male_wt":"24 pounds","female_wt":"22 pounds","coat":"Short","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"Basset Hounds","male_wt":"40-65 pounds","female_wt":"40-65 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Beagles (13 inches & under)","male_wt":"under 20 pounds","female_wt":"under 20 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Beagles (13-15 inches)","male_wt":"20-30 pounds","female_wt":"20-30 pounds","coat":"Short","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"Bearded Collies","male_wt":"45-55 pounds","female_wt":"45-55 pounds","coat":"Long","groom_m":"105","mini_m":"65","bath_m":"45","groom_f":"105","mini_f":"65","bath_f":"45"},{"breed":"Beaucerons","male_wt":"70-110 pounds","female_wt":"70-110 pounds","coat":"Medium","groom_m":"105","mini_m":"85","bath_m":"60","groom_f":"105","mini_f":"85","bath_f":"60"},{"breed":"Bedlington Terriers","male_wt":"17-23 pounds","female_wt":"17-23 pounds","coat":"Long","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35","addons":"Bedington Face: $10"},{"breed":"Belgian Malinois","male_wt":"60-80 pounds","female_wt":"40-60 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Belgian Sheepdogs","male_wt":"55-75 pounds","female_wt":"45-60 pounds","coat":"Medium","groom_m":"105","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Belgian Tervuren","male_wt":"55-75 pounds","female_wt":"45-60 pounds","coat":"Medium","groom_m":"105","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Bernese Mountain Dogs","male_wt":"80-115 pounds","female_wt":"70-95 pounds","coat":"Medium","groom_m":"105","mini_m":"85","bath_m":"60","groom_f":"105","mini_f":"85","bath_f":"60"},{"breed":"Bichons Frises","male_wt":"12-18 pounds","female_wt":"12-18 pounds","coat":"Long","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Biewer Terriers","male_wt":"4-8 pounds","female_wt":"4-8 pounds","coat":"Long","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Black and Tan Coonhounds","male_wt":"65-110 pounds","female_wt":"65-110 pounds","coat":"Short","groom_m":"105","mini_m":"85","bath_m":"55","groom_f":"105","mini_f":"85","bath_f":"55"},{"breed":"Black Russian Terriers","male_wt":"80-130 pounds","female_wt":"80-130 pounds","coat":"Medium","groom_m":"125","mini_m":"95","bath_m":"70","groom_f":"125","mini_f":"95","bath_f":"70"},{"breed":"Bloodhounds","male_wt":"90-110 pounds","female_wt":"80-100 pounds","coat":"Short","groom_m":"105","mini_m":"85","bath_m":"60","groom_f":"105","mini_f":"85","bath_f":"55"},{"breed":"Bluetick Coonhounds","male_wt":"55-80 pounds","female_wt":"45-65 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"40"},{"breed":"Boerboels","male_wt":"150-200 pounds","female_wt":"150-200 pounds","coat":"Short","groom_m":"180","mini_m":"150","bath_m":"125","groom_f":"180","mini_f":"150","bath_f":"125"},{"breed":"Border Collies","male_wt":"30-55 pounds","female_wt":"30-55 pounds","coat":"Medium","groom_m":"105","mini_m":"65","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Border Terriers","male_wt":"13-15.5 pounds","female_wt":"11.5-14 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Borzois","male_wt":"75-105 pounds","female_wt":"60-85 pounds","coat":"Medium","groom_m":"105","mini_m":"85","bath_m":"60","groom_f":"100","mini_f":"75","bath_f":"55"},{"breed":"Boston Terriers","male_wt":"12-25 pounds","female_wt":"12-25 pounds","coat":"Short","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"Bouviers des Flandres","male_wt":"70-110 pounds","female_wt":"70-110 pounds","coat":"Medium","groom_m":"105","mini_m":"85","bath_m":"60","groom_f":"105","mini_f":"85","bath_f":"60"},{"breed":"Boxers","male_wt":"65-80 pounds","female_wt":"50-65 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"60","bath_f":"50"},{"breed":"Bracco Italiano","male_wt":"55-90 pounds","female_wt":"55-90 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"95","mini_f":"70","bath_f":"45"},{"breed":"Briards","male_wt":"55-100 pounds","female_wt":"55-100 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"55","groom_f":"100","mini_f":"75","bath_f":"55"},{"breed":"Brittanys","male_wt":"30-40 pounds","female_wt":"30-40 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Brussels Griffons","male_wt":"8-10 pounds","female_wt":"8-10 pounds","coat":"Medium","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Bull Terriers","male_wt":"50-70 pounds","female_wt":"50-70 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"40"},{"breed":"Bulldogs","male_wt":"50-55 pounds","female_wt":"40-50 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Bullmastiffs","male_wt":"110-130 pounds","female_wt":"100-120 pounds","coat":"Short","groom_m":"125","mini_m":"95","bath_m":"70","groom_f":"115","mini_f":"90","bath_f":"60"},{"breed":"Cairn Terriers","male_wt":"14-18 pounds","female_wt":"13-17 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Canaan Dogs","male_wt":"45-55 pounds","female_wt":"35-45 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"45","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Cane Corso","male_wt":"99-110 pounds","female_wt":"88-99 pounds","coat":"Short","groom_m":"115","mini_m":"90","bath_m":"60","groom_f":"105","mini_f":"85","bath_f":"55"},{"breed":"Cardigan Welsh Corgis","male_wt":"30-38 pounds","female_wt":"25-34 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Cavalier King Charles Spaniels","male_wt":"13-18 pounds","female_wt":"13-18 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Cesky Terriers","male_wt":"14-24 pounds","female_wt":"14-24 pounds","coat":"Medium","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"Chihuahuas","male_wt":"3-6 pounds","female_wt":"3-6 pounds","coat":"Short","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Chinese Shar-Pei","male_wt":"45-60 pounds","female_wt":"45-60 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"45","groom_f":"90","mini_f":"60","bath_f":"45"},{"breed":"Chinooks","male_wt":"55-90 pounds","female_wt":"50-65 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Chow Chows","male_wt":"45-70 pounds","female_wt":"45-70 pounds","coat":"Medium","groom_m":"115","mini_m":"90","bath_m":"70","groom_f":"110","mini_f":"85","bath_f":"65"},{"breed":"Cocker Spaniels","male_wt":"25-30 pounds","female_wt":"20-25 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"85","mini_f":"55","bath_f":"35","addons":"$5-$10 more with skirt"},{"breed":"Collies","male_wt":"60-75 pounds","female_wt":"50-65 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Coton de Tulear","male_wt":"9-15 pounds","female_wt":"8-13 pounds","coat":"Long","groom_m":"80","mini_m":"50","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Dachshunds - miniature","male_wt":"7-11 pounds","female_wt":"7-11 pounds","coat":"Short","groom_m":"70","mini_m":"45","bath_m":"30","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Dachshunds - standard","male_wt":"16-32 pounds","female_wt":"16-32 pounds","coat":"Short","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Dalmatians","male_wt":"45-70 pounds","female_wt":"45-70 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Dandie Dinmont Terriers","male_wt":"18-24 pounds","female_wt":"18-24 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Doberman Pinschers","male_wt":"75-100 pounds","female_wt":"60-90 pounds","coat":"Short","groom_m":"105","mini_m":"85","bath_m":"55","groom_f":"95","mini_f":"70","bath_f":"45"},{"breed":"Dogo Argentino","male_wt":"80-100 pounds","female_wt":"80-100 pounds","coat":"Short","groom_m":"105","mini_m":"85","bath_m":"55","groom_f":"105","mini_f":"85","bath_f":"55"},{"breed":"Dogues de Bordeaux","male_wt":"110-145 pounds","female_wt":"99-120 pounds","coat":"Short","groom_m":"125","mini_m":"95","bath_m":"70","groom_f":"115","mini_f":"90","bath_f":"60"},{"breed":"Doodle - jumbo","male_wt":"71+ pounds","female_wt":"71+ pounds","coat":"Long","groom_m":"135","mini_m":"100","bath_m":"60","groom_f":"120","mini_f":"85","bath_f":"55"},{"breed":"Doodle - medium","male_wt":"31-45 pounds","female_wt":"31-45 pounds","coat":"Long","groom_m":"105","mini_m":"55","bath_m":"40","groom_f":"95","mini_f":"60","bath_f":"40"},{"breed":"Doodle - miniature","male_wt":"10-30 pounds","female_wt":"10-30 pounds","coat":"Long","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"Doodle - standard","male_wt":"46-70 pounds","female_wt":"46-70 pounds","coat":"Long","groom_m":"120","mini_m":"85","bath_m":"50","groom_f":"105","mini_f":"65","bath_f":"45"},{"breed":"English Foxhounds","male_wt":"60-75 pounds","female_wt":"60-75 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"95","mini_f":"70","bath_f":"45"},{"breed":"English Toy Spaniels","male_wt":"8-14 pounds","female_wt":"8-14 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Entlebucher Mountain Dogs","male_wt":"50-65 pounds","female_wt":"40-55 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"60","bath_f":"45"},{"breed":"Finnish Lapphunds","male_wt":"33-53 pounds","female_wt":"33-53 pounds","coat":"Long","groom_m":"105","mini_m":"75","bath_m":"50","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Finnish Spitz","male_wt":"25-33 pounds","female_wt":"20-28 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Fox Terriers (Smooth)","male_wt":"18 pounds","female_wt":"15-17 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Fox Terriers (Wire)","male_wt":"18 pounds","female_wt":"15-17 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"French Bulldogs","male_wt":"23-30 pounds","female_wt":"20-28 pounds","coat":"Short","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"German Pinschers","male_wt":"25-45 pounds","female_wt":"25-45 pounds","coat":"Short","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"German Shepherd Dogs","male_wt":"65-90 pounds","female_wt":"50-70 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"55","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Glen of Imaal Terriers","male_wt":"32-40 pounds","female_wt":"32-40 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Grand Basset Griffon Vendeen","male_wt":"40-45 pounds","female_wt":"40-45 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Great Danes","male_wt":"140-175 pounds","female_wt":"110-140 pounds","coat":"Short","groom_m":"145","mini_m":"110","bath_m":"80","groom_f":"125","mini_f":"95","bath_f":"70"},{"breed":"Great Pyrenees","male_wt":"120-160 pounds","female_wt":"85-115 pounds","coat":"Medium","groom_m":"145","mini_m":"110","bath_m":"95","groom_f":"120","mini_f":"90","bath_f":"65"},{"breed":"Greater Swiss Mountain Dogs","male_wt":"115-140 pounds","female_wt":"85-110 pounds","coat":"Medium","groom_m":"130","mini_m":"100","bath_m":"80","groom_f":"120","mini_f":"90","bath_f":"65"},{"breed":"Greyhounds","male_wt":"65-70 pounds","female_wt":"60-65 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"95","mini_f":"70","bath_f":"45"},{"breed":"Harriers","male_wt":"45-60 pounds","female_wt":"45-60 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Havanese","male_wt":"7-13 pounds","female_wt":"7-13 pounds","coat":"Long","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Ibizan Hounds","male_wt":"45-55 pounds","female_wt":"40-50 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Icelandic Sheepdogs","male_wt":"20-30 pounds","female_wt":"20-25 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Irish Terriers","male_wt":"25-27 pounds","female_wt":"24-26 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Irish Wolfhounds","male_wt":"120 pounds","female_wt":"105 pounds","coat":"Medium","groom_m":"130","mini_m":"95","bath_m":"75","groom_f":"125","mini_f":"95","bath_f":"70"},{"breed":"Italian Greyhounds","male_wt":"7-14 pounds","female_wt":"7-14 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Japanese Chin","male_wt":"7-11 pounds","female_wt":"7-11 pounds","coat":"Long","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Keeshonden","male_wt":"35-45 pounds","female_wt":"35-45 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Kerry Blue Terriers","male_wt":"33-40 pounds","female_wt":"22-29 pounds","coat":"Medium","groom_m":"90","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Komondorok","male_wt":"100 pounds or more","female_wt":"80 pounds or more","coat":"Medium","groom_m":"115","mini_m":"90","bath_m":"65","groom_f":"100","mini_f":"70","bath_f":"55"},{"breed":"Kuvaszok","male_wt":"100-115 pounds","female_wt":"70-90 pounds","coat":"Medium","groom_m":"115","mini_m":"90","bath_m":"65","groom_f":"100","mini_f":"70","bath_f":"55"},{"breed":"Lagotti Romagnoli","male_wt":"28.5-35 pounds","female_wt":"24-31 pounds","coat":"Long","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"50","bath_f":"35"},{"breed":"Lakeland Terriers","male_wt":"17 pounds","female_wt":"15 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Leonbergers","male_wt":"110-170 pounds","female_wt":"90-140 pounds","coat":"Medium","groom_m":"145","mini_m":"110","bath_m":"95","groom_f":"125","mini_f":"95","bath_f":"75"},{"breed":"Lhasa Apsos","male_wt":"12-18 pounds","female_wt":"12-18 pounds","coat":"Long","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Lowchen","male_wt":"15 pounds","female_wt":"15 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Maltese","male_wt":"under 7 pounds","female_wt":"under 7 pounds","coat":"Long","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Manchester Terriers - standard","male_wt":"12-22 pounds","female_wt":"12-22 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Manchester Terriers - toy","male_wt":"under 12 pounds","female_wt":"under 12 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Mastiffs","male_wt":"160-230 pounds","female_wt":"120-170 pounds","coat":"Short","groom_m":"180","mini_m":"150","bath_m":"125","groom_f":"155","mini_f":"125","bath_f":"95"},{"breed":"Miniature American Shepherds","male_wt":"20-40 pounds","female_wt":"20-40 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Miniature Bull Terriers","male_wt":"18-28 pounds","female_wt":"18-28 pounds","coat":"Short","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"Miniature Pinschers","male_wt":"8-10 pounds","female_wt":"8-10 pounds","coat":"Short","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Neapolitan Mastiffs","male_wt":"150 pounds","female_wt":"110 pounds","coat":"Short","groom_m":"145","mini_m":"110","bath_m":"80","groom_f":"115","mini_f":"90","bath_f":"60"},{"breed":"Nederlandse Kooikerhondje","male_wt":"20-30 pounds","female_wt":"20-30 pounds","coat":"Medium","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"Newfoundlands","male_wt":"130-150 pounds","female_wt":"100-120 pounds","coat":"Short","groom_m":"145","mini_m":"110","bath_m":"80","groom_f":"115","mini_f":"90","bath_f":"60","addons":"50 Deshed 50 DeMat"},{"breed":"Norfolk Terriers","male_wt":"11-12 pounds","female_wt":"11-12 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Norwegian Buhunds","male_wt":"31-40 pounds","female_wt":"26-35 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Norwegian Elkhounds","male_wt":"55 pounds","female_wt":"48 pounds","coat":"Medium","groom_m":"90","mini_m":"65","bath_m":"45","groom_f":"90","mini_f":"60","bath_f":"45"},{"breed":"Norwegian Lundehunds","male_wt":"20-30 pounds","female_wt":"20-30 pounds","coat":"Medium","groom_m":"80","mini_m":"55","bath_m":"35","groom_f":"80","mini_f":"50","bath_f":"35"},{"breed":"Norwich Terriers","male_wt":"12 pounds","female_wt":"12 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Old English Sheepdogs","male_wt":"60-100 pounds","female_wt":"60-100 pounds","coat":"Medium","groom_m":"105","mini_m":"80","bath_m":"60","groom_f":"100","mini_f":"75","bath_f":"55"},{"breed":"Otterhounds","male_wt":"115 pounds","female_wt":"80 pounds","coat":"Medium","groom_m":"125","mini_m":"95","bath_m":"75","groom_f":"100","mini_f":"70","bath_f":"55"},{"breed":"Papillons","male_wt":"5-10 pounds","female_wt":"5-10 pounds","coat":"Medium","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Parson Russell Terriers","male_wt":"13-17 pounds","female_wt":"13-17 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Pekingese","male_wt":"up to 14 pounds","female_wt":"up to 14 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Pembroke Welsh Corgis","male_wt":"up to 30 pounds","female_wt":"up to 28 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Petits Bassets Griffons Vendeens","male_wt":"25-40 pounds","female_wt":"25-40 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Pharaoh Hounds","male_wt":"45-55 pounds","female_wt":"45-55 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Pitbull - American Staffordshire Terriers","male_wt":"55-70 pounds","female_wt":"40-55 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Plotts","male_wt":"50-60 pounds","female_wt":"40-55 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Pointers","male_wt":"55-75 pounds","female_wt":"45-65 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Pointers (German Shorthaired)","male_wt":"55-70 pounds","female_wt":"45-60 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Pointers (German Wirehaired)","male_wt":"50-70 pounds","female_wt":"50-70 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Polish Lowland Sheepdogs","male_wt":"30-50 pounds","female_wt":"30-50 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Pomeranians","male_wt":"3-7 pounds","female_wt":"3-7 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Poodles - medium","male_wt":"16-30 pounds","female_wt":"16-30 poounds","coat":"Long","groom_m":"95","mini_m":"60","bath_m":"40","groom_f":"95","mini_f":"60","bath_f":"40","addons":"Clean face/feet: $10 | Poms:$10"},{"breed":"Poodles - miniature","male_wt":"10-15 pounds","female_wt":"10-15 pounds","coat":"Long","groom_m":"85","mini_m":"50","bath_m":"35","groom_f":"85","mini_f":"50","bath_f":"35","addons":"Clean face/feet: $10 | Poms:$10"},{"breed":"Poodles - standard","male_wt":"60-70 pounds","female_wt":"40-50 pounds","coat":"Long","groom_m":"120","mini_m":"85","bath_m":"50","groom_f":"120","mini_f":"65","bath_f":"45","addons":"Clean face/feet: $10 | Poms:$15"},{"breed":"Poodles - toy","male_wt":"4-6 pounds","female_wt":"4-6 pounds","coat":"Long","groom_m":"80","mini_m":"45","bath_m":"30","groom_f":"80","mini_f":"45","bath_f":"30","addons":"Clean face/feet: $10 | Poms:$10"},{"breed":"Portuguese Podengo Pequenos","male_wt":"9-13 pounds","female_wt":"9-13 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Portuguese Water Dogs","male_wt":"42-60 pounds","female_wt":"Female Wt Pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"60","bath_f":"45"},{"breed":"Pugs","male_wt":"14-18 pounds","female_wt":"14-18 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Puli","male_wt":"25-35 pounds","female_wt":"25-35 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35","addons":"Puli Corded Coat: Ask us for a quote for any service"},{"breed":"Pumi","male_wt":"27-29 pounds","female_wt":"22-24 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Pyrenean Shepherds","male_wt":"15-30 pounds","female_wt":"15-30 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Rat Terriers","male_wt":"10-25 pounds","female_wt":"10-25 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Redbone Coonhounds","male_wt":"45-70 pounds","female_wt":"45-70 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Retrievers (Chesapeake Bay)","male_wt":"65-80 pounds","female_wt":"55-70 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Retrievers (Curly-Coated)","male_wt":"60-95 pounds","female_wt":"60-95 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"55","groom_f":"95","mini_f":"70","bath_f":"55"},{"breed":"Retrievers (Flat-Coated)","male_wt":"60-70 pounds","female_wt":"60-70 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"95","mini_f":"70","bath_f":"50"},{"breed":"Retrievers (Golden)","male_wt":"65-75 pounds","female_wt":"55-65 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Retrievers (Labrador)","male_wt":"65-80 pounds","female_wt":"55-70 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Retrievers (Nova Scotia Duck Tolling)","male_wt":"35-50 pounds","female_wt":"35-50 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Rhodesian Ridgebacks","male_wt":"85 pounds","female_wt":"70 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"55","groom_f":"95","mini_f":"70","bath_f":"45"},{"breed":"Rottweilers","male_wt":"95-135 pounds","female_wt":"80-100 pounds","coat":"Short","groom_m":"120","mini_m":"85","bath_m":"60","groom_f":"105","mini_f":"85","bath_f":"55"},{"breed":"Russell Terriers","male_wt":"9-15 pounds","female_wt":"9-15 pounds","coat":"Short","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Russian Toys","male_wt":"Up to 6.5 pounds","female_wt":"Up to 6.5 pounds","coat":"short","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Salukis","male_wt":"40-65 pounds","female_wt":"40-65 pounds","coat":"Medium","groom_m":"90","mini_m":"65","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Samoyeds","male_wt":"45-65 pounds","female_wt":"35-50 pounds","coat":"Medium","groom_m":"115","mini_m":"90","bath_m":"70","groom_f":"95","mini_f":"70","bath_f":"50"},{"breed":"Schipperkes","male_wt":"10-16 pounds","female_wt":"10-16 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Schnauzers - Giant","male_wt":"60-85 pounds","female_wt":"55-75 pounds","coat":"Medium","groom_m":"130","mini_m":"80","bath_m":"50","groom_f":"105","mini_f":"70","bath_f":"50"},{"breed":"Schnauzers - Miniature","male_wt":"11-20 pounds","female_wt":"11-20 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Schnauzers - Standard","male_wt":"35-50 pounds","female_wt":"30-45 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Scottish Deerhounds","male_wt":"85-110 pounds","female_wt":"75-95 pounds","coat":"Medium","groom_m":"105","mini_m":"85","bath_m":"60","groom_f":"100","mini_f":"70","bath_f":"55"},{"breed":"Scottish Terriers","male_wt":"19-22 pounds","female_wt":"18-21 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Sealyham Terriers","male_wt":"23-24 pounds","female_wt":"18-21 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Setters (English)","male_wt":"65-80 pounds","female_wt":"45-55 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Setters (Gordon)","male_wt":"55-80 pounds","female_wt":"45-70 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"55","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Setters (Irish Red and White)","male_wt":"42-60 pounds","female_wt":"35-50 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"45"},{"breed":"Setters (Irish)","male_wt":"70 pounds","female_wt":"60 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Shetland Sheepdogs","male_wt":"15-25 pounds","female_wt":"15-25 pounds","coat":"Medium","groom_m":"80","mini_m":"55","bath_m":"35","groom_f":"80","mini_f":"55","bath_f":"35"},{"breed":"Shiba Inu","male_wt":"23 pounds","female_wt":"17 pounds","coat":"Medium","groom_m":"80","mini_m":"50","bath_m":"35","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Shih Tzu","male_wt":"9-16 pounds","female_wt":"9-16 pounds","coat":"Long","groom_m":"70","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Siberian Huskies","male_wt":"45-60 pounds","female_wt":"35-50 pounds","coat":"Medium","groom_m":"115","mini_m":"90","bath_m":"70","groom_f":"110","mini_f":"85","bath_f":"65"},{"breed":"Silky Terriers","male_wt":"around 10 pounds","female_wt":"around 10 pounds","coat":"Long","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Skye Terriers","male_wt":"35-45 pounds","female_wt":"35-40 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Sloughis","male_wt":"35-50 pounds","female_wt":"35-50 pounds","coat":"Short","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Soft Coated Wheaten Terriers","male_wt":"35-40 pounds","female_wt":"30-35 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Spaniels (American Water)","male_wt":"30-45 pounds","female_wt":"25-40 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Spaniels (Boykin)","male_wt":"30-40 pounds","female_wt":"25-35 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Spaniels (Clumber)","male_wt":"70-85 pounds","female_wt":"55-70 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"55","groom_f":"95","mini_f":"70","bath_f":"50"},{"breed":"Spaniels (English Cocker)","male_wt":"28-34 pounds","female_wt":"26-32 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"35","groom_f":"90","mini_f":"60","bath_f":"35"},{"breed":"Spaniels (English Springer)","male_wt":"50 pounds","female_wt":"40 pounds","coat":"Medium","groom_m":"90","mini_m":"65","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Spaniels (Field)","male_wt":"35-50 pounds","female_wt":"35-50 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Spaniels (Irish Water)","male_wt":"55-68 pounds","female_wt":"45-58 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"60","bath_f":"45"},{"breed":"Spaniels (Sussex)","male_wt":"35-45 pounds","female_wt":"35-45 pounds","coat":"Medium","groom_m":"90","mini_m":"60","bath_m":"40","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Spaniels (Welsh Springer)","male_wt":"40-55 pounds","female_wt":"35-50 pounds","coat":"Medium","groom_m":"90","mini_m":"65","bath_m":"45","groom_f":"90","mini_f":"60","bath_f":"45"},{"breed":"Spanish Water Dogs","male_wt":"40-49 pounds","female_wt":"31-40 pounds","coat":"Long","groom_m":"115","mini_m":"75","bath_m":"50","groom_f":"100","mini_f":"65","bath_f":"45"},{"breed":"Spinoni Italiani","male_wt":"70-81 pounds","female_wt":"62-66 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"55","groom_f":"95","mini_f":"70","bath_f":"50"},{"breed":"St. Bernards","male_wt":"140-180 pounds","female_wt":"120-140 pounds","coat":"Medium","groom_m":"155","mini_m":"125","bath_m":"115","groom_f":"145","mini_f":"110","bath_f":"95"},{"breed":"Staffordshire Bull Terriers","male_wt":"28-38 pounds","female_wt":"24 to 34 pounds","coat":"Short","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Swedish Vallhunds","male_wt":"20-35 pounds","female_wt":"20-35 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Tibetan Mastiffs","male_wt":"90-150 pounds","female_wt":"70-120 pounds","coat":"Medium","groom_m":"130","mini_m":"100","bath_m":"80","groom_f":"120","mini_f":"90","bath_f":"65"},{"breed":"Tibetan Spaniel","male_wt":"9-15 pounds","female_wt":"9-15 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Tibetan Terriers","male_wt":"18-30 pounds","female_wt":"18-22 pounds","coat":"Medium","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Toy Fox Terriers","male_wt":"4-9 pounds","female_wt":"4-9 pounds","coat":"Short","groom_m":"70","mini_m":"40","bath_m":"25","groom_f":"70","mini_f":"40","bath_f":"25"},{"breed":"Treeing Walker Coonhounds","male_wt":"50-70 pounds","female_wt":"50-70 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"45","groom_f":"90","mini_f":"65","bath_f":"40"},{"breed":"Vizslas","male_wt":"55-60 pounds","female_wt":"44-55 pounds","coat":"Short","groom_m":"90","mini_m":"65","bath_m":"40","groom_f":"90","mini_f":"65","bath_f":"40"},{"breed":"Weimaraners","male_wt":"70-90 pounds","female_wt":"55-75 pounds","coat":"Short","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Welsh Terriers","male_wt":"19-22 pounds","female_wt":"17-20 pounds","coat":"Medium","groom_m":"80","mini_m":"55","bath_m":"35","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"West Highland White Terriers","male_wt":"15-20 pounds","female_wt":"15-20 pounds","coat":"Medium","groom_m":"75","mini_m":"45","bath_m":"30","groom_f":"75","mini_f":"45","bath_f":"30"},{"breed":"Whippets","male_wt":"25-40 pounds","female_wt":"25-40 pounds","coat":"Short","groom_m":"85","mini_m":"55","bath_m":"35","groom_f":"85","mini_f":"55","bath_f":"35"},{"breed":"Wirehaired Pointing Griffons","male_wt":"50-70 pounds","female_wt":"35-50 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"60","bath_f":"40"},{"breed":"Wirehaired Vizslas","male_wt":"55-65 pounds","female_wt":"45-55 pounds","coat":"Medium","groom_m":"95","mini_m":"70","bath_m":"50","groom_f":"90","mini_f":"65","bath_f":"45"},{"breed":"Yorkshire Terriers","male_wt":"7 pounds","female_wt":"7 pounds","coat":"Long","groom_m":"75","mini_m":"40","bath_m":"30","groom_f":"75","mini_f":"40","bath_f":"30"}];
 
-function pickSize(btn) {
-  document.querySelectorAll('.szb').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  curSize = btn.dataset.s;
+let selectedBreed = null;
+let selectedGender = 'm';
+let activeIdx = -1;
+
+function selectGender(g) {
+  selectedGender = g;
+  document.getElementById('genM').classList.toggle('on', g === 'm');
+  document.getElementById('genF').classList.toggle('on', g === 'f');
 }
 
-function autoSize() {
-  const w = parseFloat(document.getElementById('dogWeight').value);
-  if (isNaN(w)) return;
-  const s = w < 20 ? 'small' : w < 50 ? 'medium' : w < 90 ? 'large' : 'xlarge';
-  document.querySelectorAll('.szb').forEach(b => {
-    const on = b.dataset.s === s;
-    b.classList.toggle('on', on);
-  });
-  curSize = s;
+function getMatches(q) {
+  if (!q || q.length < 1) return [];
+  const lower = q.toLowerCase();
+  return BREED_PRICES.filter(b => b.breed.toLowerCase().includes(lower)).slice(0, 12);
 }
 
-const PRICES = {
-  small:  { bath:35, groom:55, nails:15, dayF:35, dayH:20, board:45, long:8,  curly:12, wire:8  },
-  medium: { bath:50, groom:75, nails:15, dayF:42, dayH:25, board:55, long:14, curly:20, wire:14 },
-  large:  { bath:70, groom:95, nails:20, dayF:50, dayH:30, board:65, long:20, curly:28, wire:20 },
-  xlarge: { bath:90, groom:125,nails:25, dayF:60, dayH:35, board:80, long:28, curly:38, wire:28 },
-};
-const SIZE_LABELS = { small:'Small', medium:'Medium', large:'Large', xlarge:'Extra Large' };
+function filterBreeds() {
+  const q = document.getElementById('breedSearch').value;
+  selectedBreed = null;
+  activeIdx = -1;
+  showDropdown(q);
+}
 
-function generatePrices() {
-  const name   = document.getElementById('dogName').value.trim() || 'Your Pup';
-  const breed  = document.getElementById('dogBreed').value.trim();
-  const weight = document.getElementById('dogWeight').value;
-  const coat   = document.getElementById('coatType').value;
+function showDropdown(q) {
+  q = q !== undefined ? q : document.getElementById('breedSearch').value;
+  const dd = document.getElementById('breedDropdown');
+  const matches = getMatches(q);
+  if (!matches.length || !q) { dd.classList.remove('open'); return; }
+  dd.innerHTML = matches.map((b, i) =>
+    `<div class="breed-opt" data-breed="${b.breed}" onmousedown="selectBreed('${b.breed}')">${b.breed}</div>`
+  ).join('');
+  dd.classList.add('open');
+}
 
-  // auto-detect size from weight if not selected
-  if (!curSize && weight) {
-    const w = parseFloat(weight);
-    curSize = w < 20 ? 'small' : w < 50 ? 'medium' : w < 90 ? 'large' : 'xlarge';
-    document.querySelectorAll('.szb').forEach(b => {
-      b.classList.toggle('on', b.dataset.s === curSize);
-    });
+function selectBreed(name) {
+  selectedBreed = BREED_PRICES.find(b => b.breed === name);
+  document.getElementById('breedSearch').value = name;
+  document.getElementById('breedDropdown').classList.remove('open');
+}
+
+function breedKeyNav(e) {
+  const dd = document.getElementById('breedDropdown');
+  const opts = dd.querySelectorAll('.breed-opt');
+  if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx+1, opts.length-1); }
+  else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx-1, 0); }
+  else if (e.key === 'Enter') {
+    if (activeIdx >= 0 && opts[activeIdx]) selectBreed(opts[activeIdx].dataset.breed);
+    else lookupBreed();
+    return;
+  } else if (e.key === 'Escape') { dd.classList.remove('open'); return; }
+  opts.forEach((o,i) => o.classList.toggle('active', i === activeIdx));
+  if (opts[activeIdx]) opts[activeIdx].scrollIntoView({block:'nearest'});
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.breed-input-wrap'))
+    document.getElementById('breedDropdown').classList.remove('open');
+});
+
+function lookupBreed() {
+  const q = document.getElementById('breedSearch').value.trim();
+  if (!selectedBreed && q) {
+    const matches = getMatches(q);
+    if (matches.length) selectedBreed = matches[0];
   }
-
-  if (!curSize) {
-    alert('Please select a size or enter a weight!');
+  if (!selectedBreed) {
+    alert('Please select a breed from the list!');
     return;
   }
+  const b = selectedBreed;
+  const g = selectedGender;
+  const groom = g === 'm' ? b.groom_m : b.groom_f;
+  const mini  = g === 'm' ? b.mini_m  : b.mini_f;
+  const bath  = g === 'm' ? b.bath_m  : b.bath_f;
+  const wt    = g === 'm' ? b.male_wt : b.female_wt;
+  const gLabel = g === 'm' ? '♂ Male' : '♀ Female';
 
-  const p = PRICES[curSize];
-  const coatExtra = { long: p.long, curly: p.curly, wire: p.wire }[coat] || 0;
-  const coatNote = coatExtra > 0 ? ` + $${coatExtra} coat surcharge` : '';
-  const wStr = weight ? ` · ${weight} lbs` : '';
-  const bStr = breed ? ` — ${breed}` : '';
-
-  const services = [
-    { icon:'🛁', name:'Bath & Brush Out', desc:'Full bath, blow dry, brush & fresh spritz', amt: p.bath, per:'per visit' },
-    { icon:'✂️', name:'Full Groom (Haircut)', desc:`Bath + breed-specific styling${coatNote}`, amt: p.groom + coatExtra, per:'per visit' },
-    { icon:'💅', name:'Nail Trim & Grind', desc:'Clip, file & soothing paw balm', amt: p.nails, per:'per visit' },
-    { icon:'🌞', name:'Daycare — Full Day', desc:'Cage-free play 7AM–7PM with rest breaks', amt: p.dayF, per:'per day' },
-    { icon:'🌤️', name:'Daycare — Half Day', desc:'Up to 5 hours of supervised play', amt: p.dayH, per:'per half day' },
-    { icon:'🌙', name:'Overnight Boarding', desc:'Private suite, 3 walks & bedtime tuck-in', amt: p.board, per:'per night' },
-  ];
+  const fmt = v => v && v !== '-' && v !== '0' ? `<span class="price-amt">$${v}</span>` : `<span style="color:var(--text-muted);font-size:0.85rem">Call for quote</span>`;
 
   let html = `
-    <div class="res-header">
-      <div class="res-dog-name">${name}${bStr}</div>
-      <div class="res-badge">${SIZE_LABELS[curSize]}${wStr}</div>
-    </div>
-    <div class="price-cards">
-  `;
-
-  services.forEach((s, i) => {
-    html += `
-      <div class="pc" style="animation-delay:${i * 0.07}s">
-        <div class="pc-icon">${s.icon}</div>
-        <div class="pc-info">
-          <div class="pc-name">${s.name}</div>
-          <div class="pc-desc">${s.desc}</div>
-        </div>
-        <div class="pc-price">
-          <div class="pc-amt">$${s.amt}</div>
-          <div class="pc-per">${s.per}</div>
-        </div>
+    <div class="price-result-wrap">
+      <div class="res-header">
+        <div class="res-breed-name">${b.breed}</div>
+        <span style="background:var(--accent);color:var(--btn-text);font-size:0.7rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;padding:0.28rem 0.8rem;border-radius:20px">${gLabel}</span>
       </div>
-    `;
-  });
-
-  html += `</div>
-    <div class="res-note">
-      <strong>📌 Good to know:</strong> These are estimates based on size & coat type. Final pricing confirmed at drop-off after a quick coat check. Multi-dog households get 10% off! Ask about our loyalty punch card — <strong>every 6th groom is FREE</strong> 🐾
-    </div>
-    <a href="#contact" class="res-book">Book an Appointment →</a>
+      <div class="res-meta">📏 Weight: ${wt} &nbsp;·&nbsp; 🪮 Coat: ${b.coat}</div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Service</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="svc-label">✂️ Full Groom</span><span class="svc-desc">Bath + breed-specific styling & haircut</span></td>
+            <td>${fmt(groom)}</td>
+          </tr>
+          <tr>
+            <td><span class="svc-label">🪮 Mini Groom</span><span class="svc-desc">Bath, brush out, trim & tidy — no full haircut</span></td>
+            <td>${fmt(mini)}</td>
+          </tr>
+          <tr>
+            <td><span class="svc-label">🛁 Bath & Brush</span><span class="svc-desc">Full bath, blow dry, brush out & spritz</span></td>
+            <td>${fmt(bath)}</td>
+          </tr>
+        </tbody>
+      </table>
   `;
 
-  const area = document.getElementById('resultsArea');
-  area.innerHTML = html;
+  if (b.addons) {
+    html += `<div class="addon-note"><strong>📌 Add-on note:</strong> ${b.addons}</div>`;
+  }
 
-  // Scroll results into view on mobile
+  html += `
+      <div class="addon-note" style="margin-top:0.75rem">
+        <strong>💅 Nail Trim & Grind</strong> — available as add-on for all services<br>
+        <strong>🦷 Teeth Brushing</strong> — add-on available &nbsp;·&nbsp; <strong>Multi-dog households</strong> get 10% off!
+      </div>
+      <a href="#contact" class="res-book">Book an Appointment for ${b.breed} →</a>
+    </div>
+  `;
+
+  document.getElementById('priceResult').innerHTML = html;
   if (window.innerWidth < 960) {
-    setTimeout(() => area.scrollIntoView({ behavior:'smooth', block:'start' }), 100);
+    setTimeout(() => document.getElementById('priceResult').scrollIntoView({behavior:'smooth',block:'start'}), 100);
   }
 }
 
