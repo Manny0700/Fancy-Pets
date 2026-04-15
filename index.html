@@ -567,6 +567,49 @@
       transition: all 0.3s;
     }
     .res-book:hover { opacity: 0.88; transform: translateY(-2px); }
+    /* Add-ons */
+    .addons-section { margin-top: 1.5rem; }
+    .addons-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600; margin-bottom: 1rem;
+    }
+    .addons-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.6rem; max-height: 340px; overflow-y: auto;
+      padding-right: 0.3rem;
+    }
+    .addons-grid::-webkit-scrollbar { width: 4px; }
+    .addons-grid::-webkit-scrollbar-track { background: var(--bg2); border-radius: 4px; }
+    .addons-grid::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 4px; }
+    .addon-item {
+      display: flex; align-items: flex-start; gap: 0.7rem;
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 12px; padding: 0.75rem 0.9rem;
+      cursor: pointer; transition: all 0.2s;
+      user-select: none;
+    }
+    .addon-item:hover { border-color: var(--accent); }
+    .addon-item.checked { border-color: var(--accent); background: var(--bg2); }
+    .addon-item input[type=checkbox] { margin-top: 2px; accent-color: var(--accent); flex-shrink:0; cursor:pointer; width:15px; height:15px; }
+    .addon-item-info { flex: 1; min-width: 0; }
+    .addon-item-name { font-size: 0.85rem; font-weight: 600; }
+    .addon-item-desc { font-size: 0.72rem; color: var(--text-muted); margin-top: 0.1rem; line-height: 1.4; }
+    .addon-item-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 600; color: var(--accent);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .addon-total {
+      margin-top: 1rem; padding: 1rem 1.2rem;
+      background: var(--card); border: 1px solid var(--border2);
+      border-radius: 12px; display: flex;
+      align-items: center; justify-content: space-between;
+    }
+    .addon-total-label { font-size: 0.85rem; font-weight: 600; }
+    .addon-total-amt {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600; color: var(--accent);
+    }
     @keyframes slideRight {
       from { opacity:0; transform:translateX(22px); }
       to { opacity:1; transform:translateX(0); }
@@ -1114,6 +1157,49 @@ document.addEventListener('click', e => {
     document.getElementById('breedDropdown').classList.remove('open');
 });
 
+const ADDONS = [
+  {name:'Healthy Skin Treatment',desc:'Probiotic Shampoo & Probiotic Ear Cleaning. Reduces itching and supports healthy skin.',price:18},
+  {name:'Spa Upgrade',desc:'Blueberry Facial and Paw Balm. Cleaner Face, Softer Paws, Smells Amazing.',price:12},
+  {name:'De-Shed Treatment',desc:'De-shed Shampoo plus blowout. Reduces shedding at home.',price:22},
+  {name:'De-Shed',desc:'Starts at $15',price:15},
+  {name:'Blueberry Facial',desc:'A relaxing facial with our deluxe blueberry facial treatment.',price:7},
+  {name:'Coat Conditioning',desc:'',price:5},
+  {name:'De-Mat Level 1',desc:'Starts at $15',price:15},
+  {name:'De-Mat Level 2',desc:'Dematting fee',price:30},
+  {name:'De-Mat Level 3',desc:'Level three dematting',price:45},
+  {name:'Dremel Nail Grind',desc:'',price:15},
+  {name:'Ear Plucking',desc:'',price:15},
+  {name:'Face Trim Only',desc:'',price:15},
+  {name:'Flea Bath',desc:'Bath with our special flea shampoo.',price:15},
+  {name:'Flea Treatment',desc:'',price:25},
+  {name:'Gland Expression',desc:'',price:15},
+  {name:'Medicated Shampoo',desc:'Antimicrobial LP3 Enzyme System with Vitamin D3 and Avena Sativa for sensitive, dry, or irritated skin.',price:15},
+  {name:'Medication Administration',desc:'Administration of medication during service.',price:3},
+  {name:'Nail Clipping',desc:'',price:15},
+  {name:'Paw Pad Trim',desc:'',price:5},
+  {name:'Sanitary Groom',desc:'',price:10},
+  {name:'Special Handling',desc:'Service charge for pets who need extra attention during their service.',price:15},
+  {name:'Special Handling Level 2',desc:'When your pet needs additional special attention.',price:25},
+  {name:'Teeth Brushing',desc:'',price:10},
+  {name:'Teeth Cleaning',desc:'Clean Teeth Happy Feet',price:185},
+  {name:'Clean Face',desc:'',price:5},
+  {name:'Clean Feet',desc:'',price:5},
+  {name:'Poodle Cut',desc:'Pom poms on feet and tail — Clean Face and Teeth included.',price:25},
+  {name:'Color — Labor Cost',desc:'$25/hr for solid areas. $100/hr for designs.',price:15},
+  {name:'Color — Material Cost',desc:'Hair coloring charged per zone or per hour for designs.',price:15},
+  {name:'Cat / Bunny / Guinea Nails',desc:'',price:20},
+  {name:'Food Service',desc:'Forgot your food? We can take care of it for you.',price:5},
+  {name:'Food Service — Extra Large',desc:'For larger pets. We can accommodate.',price:10},
+];
+
+function updateAddonTotal() {
+  const checks = document.querySelectorAll('#addonsGrid input[type=checkbox]:checked');
+  let total = 0;
+  checks.forEach(c => total += parseFloat(c.value) || 0);
+  const el = document.getElementById('addonTotal');
+  if (el) el.textContent = '$' + total;
+}
+
 function lookupBreed() {
   const q = document.getElementById('breedSearch').value.trim();
   if (!selectedBreed && q) {
@@ -1167,13 +1253,28 @@ function lookupBreed() {
   `;
 
   if (b.addons) {
-    html += `<div class="addon-note"><strong>📌 Add-on note:</strong> ${b.addons}</div>`;
+    html += `<div class="addon-note"><strong>📌 Breed note:</strong> ${b.addons}</div>`;
   }
 
   html += `
-      <div class="addon-note" style="margin-top:0.75rem">
-        <strong>💅 Nail Trim & Grind</strong> — available as add-on for all services<br>
-        <strong>🦷 Teeth Brushing</strong> — add-on available &nbsp;·&nbsp; <strong>Multi-dog households</strong> get 10% off!
+      <div class="addons-section">
+        <div class="addons-title">✨ Add-ons</div>
+        <div class="addons-grid" id="addonsGrid">
+          ${ADDONS.map((a,i) => `
+            <label class="addon-item" id="addon_${i}">
+              <input type="checkbox" onchange="updateAddonTotal()" value="${a.price}">
+              <div class="addon-item-info">
+                <div class="addon-item-name">${a.name}</div>
+                ${a.desc ? `<div class="addon-item-desc">${a.desc}</div>` : ''}
+              </div>
+              <div class="addon-item-price">${a.price > 0 ? '$'+a.price : 'Free'}</div>
+            </label>
+          `).join('')}
+        </div>
+        <div class="addon-total">
+          <span class="addon-total-label">Add-ons Total</span>
+          <span class="addon-total-amt" id="addonTotal">$0</span>
+        </div>
       </div>
       <a href="#contact" class="res-book">Book an Appointment for ${b.breed} →</a>
     </div>
