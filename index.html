@@ -644,6 +644,70 @@
       .services-wrap{gap:1rem}
       .svc-card{padding:2rem}
     }
+    /* ===== APPOINTMENT REQUEST MODAL ===== */
+    .req-overlay{position:fixed;inset:0;z-index:9990;background:rgba(20,16,14,0.7);backdrop-filter:blur(12px) saturate(140%);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s var(--ease-out-quart);padding:1.5rem}
+    .req-overlay.open{opacity:1;pointer-events:all}
+    .req-modal{background:var(--paper);border:1px solid var(--line);border-radius:2px;width:100%;max-width:560px;max-height:92vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.5);transform:translateY(24px) scale(0.96);transition:transform 0.5s var(--ease-out-expo);position:relative}
+    .req-overlay.open .req-modal{transform:translateY(0) scale(1)}
+    .req-close{position:absolute;top:1rem;right:1rem;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:all 0.3s ease;z-index:2}
+    .req-close:hover{border-color:var(--accent);color:var(--accent);transform:rotate(90deg)}
+    .req-close svg{width:14px;height:14px}
+    .req-header{padding:2.4rem 2.4rem 1.4rem;border-bottom:1px solid var(--line-soft)}
+    .req-eyebrow{font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;display:flex;align-items:center;gap:0.7rem;margin-bottom:0.9rem}
+    .req-eyebrow::before{content:'';width:24px;height:1px;background:var(--accent)}
+    .req-title{font-family:'Fraunces',serif;font-size:2rem;font-weight:400;line-height:1.05;letter-spacing:-0.02em;font-variation-settings:"SOFT" 40}
+    .req-title .sw{font-style:italic;color:var(--accent);font-variation-settings:"SOFT" 100,"WONK" 1}
+    .req-sub{font-size:0.88rem;color:var(--ink-muted);line-height:1.55;margin-top:0.7rem}
+    .req-form{padding:1.8rem 2.4rem 2.4rem}
+    .req-row{margin-bottom:1.3rem}
+    .req-row.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:480px){.req-row.two{grid-template-columns:1fr}}
+    .req-label{display:block;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-muted);font-weight:600;margin-bottom:0.55rem}
+    .req-label .num{color:var(--accent);font-family:'DM Mono',monospace;margin-right:0.5rem}
+    .req-input{width:100%;padding:0.85rem 1rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:'Inter Tight',sans-serif;font-size:0.95rem;outline:none;border-radius:2px;transition:border-color 0.2s,box-shadow 0.2s}
+    .req-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(61,107,61,0.12)}
+    .req-input::placeholder{color:var(--ink-muted);opacity:0.55}
+    .req-service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.4rem}
+    @media(max-width:480px){.req-service-grid{grid-template-columns:repeat(2,1fr)}}
+    .req-svc-btn{padding:0.75rem 0.5rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:'Inter Tight',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.04em;cursor:pointer;border-radius:2px;transition:all 0.2s;text-align:center}
+    .req-svc-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .req-svc-btn.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+    .req-time-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem}
+    .req-time-btn{padding:0.7rem 0.4rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:'Inter Tight',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;border-radius:2px;transition:all 0.2s;text-align:center}
+    .req-time-btn:hover{border-color:var(--accent);color:var(--accent)}
+    .req-time-btn.on{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+    .req-conditional{display:none}
+    .req-conditional.show{display:block;animation:reqFade 0.4s ease}
+    @keyframes reqFade{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+    .req-addons{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-top:0.3rem}
+    @media(max-width:480px){.req-addons{grid-template-columns:1fr}}
+    .req-addon{display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.85rem;border:1px solid var(--line);border-radius:2px;cursor:pointer;font-size:0.85rem;color:var(--ink);transition:all 0.2s;user-select:none;background:var(--bg)}
+    .req-addon:hover{border-color:var(--accent)}
+    .req-addon input{accent-color:var(--accent);width:15px;height:15px;cursor:pointer;flex-shrink:0}
+    .req-addon.checked{border-color:var(--accent);background:var(--paper-warm)}
+    .req-textarea{width:100%;padding:0.85rem 1rem;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:'Inter Tight',sans-serif;font-size:0.92rem;outline:none;border-radius:2px;resize:vertical;min-height:72px;transition:border-color 0.2s}
+    .req-textarea:focus{border-color:var(--accent)}
+    .req-honeypot{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+    .req-submit{width:100%;padding:1.05rem;background:var(--ink);color:var(--bg);border:none;border-radius:2px;font-family:'Inter Tight',sans-serif;font-size:0.82rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;cursor:pointer;transition:all 0.3s var(--ease-out-expo);position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:0.7rem;margin-top:0.4rem}
+    .req-submit::before{content:'';position:absolute;inset:0;background:var(--accent);transform:translateY(100%);transition:transform 0.4s var(--ease-out-expo)}
+    .req-submit span,.req-submit svg{position:relative;z-index:2}
+    .req-submit:hover::before{transform:translateY(0)}
+    .req-submit:hover{transform:translateY(-2px);box-shadow:0 12px 30px var(--shadow-mid)}
+    .req-submit:disabled{opacity:0.55;cursor:not-allowed;transform:none}
+    .req-submit:disabled::before{transform:translateY(100%)}
+    .req-submit svg{width:12px;height:12px;transition:transform 0.3s var(--ease-spring)}
+    .req-submit:hover:not(:disabled) svg{transform:translate(3px,-3px)}
+    .req-status{margin-top:1rem;padding:0.9rem 1rem;border-radius:2px;font-size:0.85rem;text-align:center;display:none}
+    .req-status.show{display:block;animation:reqFade 0.3s ease}
+    .req-status.error{background:rgba(200,90,72,0.1);border:1px solid rgba(200,90,72,0.3);color:var(--coral)}
+    .req-status.success{background:rgba(61,107,61,0.1);border:1px solid rgba(61,107,61,0.3);color:var(--accent)}
+    .req-success-screen{text-align:center;padding:3rem 2rem 2.4rem}
+    .req-success-icon{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--accent);display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem;color:var(--accent);animation:checkPop 0.6s var(--ease-spring) both}
+    @keyframes checkPop{from{opacity:0;transform:scale(0.5) rotate(-20deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+    .req-success-icon svg{width:28px;height:28px}
+    .req-success-title{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:400;line-height:1.05;margin-bottom:0.6rem;font-variation-settings:"SOFT" 40}
+    .req-success-title .sw{font-style:italic;color:var(--accent);font-variation-settings:"SOFT" 100,"WONK" 1}
+    .req-success-msg{font-size:0.95rem;color:var(--ink-soft);line-height:1.6;max-width:380px;margin:0 auto}
   </style>
 </head>
 <body>
@@ -1703,6 +1767,261 @@ function lookupBreed() {
     setTimeout(() => document.getElementById('priceResult').scrollIntoView({behavior:'smooth', block:'start'}), 100);
   }
 }
+ /* ========================================= APPOINTMENT REQUEST MODAL ========================================= */
+let reqSelectedService = null;
+let reqSelectedTime = null;
+
+function openReqModal() {
+  document.getElementById('reqOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('reqFormView').style.display = '';
+  document.getElementById('reqSuccessView').style.display = 'none';
+}
+
+function closeReqModal() {
+  document.getElementById('reqOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('reqOverlay').addEventListener('click', (e) => {
+  if (e.target.id === 'reqOverlay') closeReqModal();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('reqOverlay').classList.contains('open')) {
+    closeReqModal();
+  }
+});
+
+function reqPickService(btn) {
+  document.querySelectorAll('.req-svc-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  reqSelectedService = btn.dataset.svc;
+
+  const dateBlock = document.getElementById('reqDateBlock');
+  const boardingBlock = document.getElementById('reqBoardingBlock');
+  if (reqSelectedService === 'Boarding') {
+    dateBlock.classList.remove('show');
+    boardingBlock.classList.add('show');
+  } else {
+    boardingBlock.classList.remove('show');
+    dateBlock.classList.add('show');
+  }
+}
+
+function reqPickTime(btn) {
+  document.querySelectorAll('.req-time-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  reqSelectedTime = btn.dataset.time;
+}
+
+document.querySelectorAll('.req-addon input[type=checkbox]').forEach(cb => {
+  cb.addEventListener('change', () => {
+    cb.closest('.req-addon').classList.toggle('checked', cb.checked);
+  });
+});
+
+document.getElementById('reqForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const status = document.getElementById('reqStatus');
+  const submitBtn = document.getElementById('reqSubmitBtn');
+  status.classList.remove('show', 'error', 'success');
+
+  if (!reqSelectedService) {
+    status.textContent = 'Please choose a service.';
+    status.classList.add('show', 'error');
+    return;
+  }
+
+  const payload = {
+    name: document.getElementById('reqName').value.trim(),
+    phone: document.getElementById('reqPhone').value.trim(),
+    dogName: document.getElementById('reqDogName').value.trim(),
+    breed: document.getElementById('reqBreed').value.trim(),
+    service: reqSelectedService,
+    website: document.getElementById('reqWebsite').value,
+  };
+
+  if (reqSelectedService === 'Boarding') {
+    payload.checkIn = document.getElementById('reqCheckIn').value;
+    payload.checkOut = document.getElementById('reqCheckOut').value;
+    payload.addons = Array.from(document.querySelectorAll('.req-addon input[type=checkbox]:checked')).map(cb => cb.value);
+    payload.notes = document.getElementById('reqNotes').value.trim();
+  } else {
+    payload.preferredDate = document.getElementById('reqPreferredDate').value;
+    payload.timeOfDay = reqSelectedTime || '';
+  }
+
+  if (!payload.name || !payload.phone || !payload.dogName || !payload.breed) {
+    status.textContent = 'Please fill in name, phone, dog\'s name, and breed.';
+    status.classList.add('show', 'error');
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.querySelector('span').textContent = 'Sending…';
+
+  try {
+    const res = await fetch('/api/request-appointment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (res.ok) {
+      document.getElementById('reqFormView').style.display = 'none';
+      document.getElementById('reqSuccessView').style.display = '';
+      document.getElementById('reqForm').reset();
+      document.querySelectorAll('.req-svc-btn,.req-time-btn').forEach(b => b.classList.remove('on'));
+      document.querySelectorAll('.req-addon').forEach(a => a.classList.remove('checked'));
+      reqSelectedService = null;
+      reqSelectedTime = null;
+      document.getElementById('reqDateBlock').classList.remove('show');
+      document.getElementById('reqBoardingBlock').classList.remove('show');
+    } else {
+      const errData = await res.json().catch(() => ({}));
+      status.textContent = errData.error || 'Something went wrong. Please call us at (407) 833-3880.';
+      status.classList.add('show', 'error');
+    }
+  } catch (err) {
+    status.textContent = 'Network error. Please call us at (407) 833-3880.';
+    status.classList.add('show', 'error');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.querySelector('span').textContent = 'Send Request';
+  }
+});
+
+// Wire up Book Now / Get an Estimate buttons
+document.querySelectorAll(
+  '.nav-cta, .hero-btns .btn-primary, .cta-btns .btn-primary, .res-book'
+).forEach(el => {
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    openReqModal();
+  });
+});
 </script>
+ <!-- APPOINTMENT REQUEST MODAL -->
+<div class="req-overlay" id="reqOverlay" role="dialog" aria-modal="true" aria-labelledby="reqTitle">
+  <div class="req-modal">
+    <button class="req-close" type="button" onclick="closeReqModal()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6L18 18" stroke-linecap="round"/></svg>
+    </button>
+
+    <!-- Form view -->
+    <div id="reqFormView">
+      <div class="req-header">
+        <div class="req-eyebrow">Request an Appointment</div>
+        <h3 class="req-title" id="reqTitle">Tell us about your <em class="sw">pup.</em></h3>
+        <p class="req-sub">A few quick details and we'll text or call you back to confirm. We typically respond within an hour during business hours.</p>
+      </div>
+
+      <form class="req-form" id="reqForm" novalidate>
+        <!-- Honeypot for spam bots — hidden from real users -->
+        <div class="req-honeypot" aria-hidden="true">
+          <label for="reqWebsite">Website (leave blank)</label>
+          <input type="text" id="reqWebsite" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="req-row two">
+          <div>
+            <label class="req-label" for="reqName"><span class="num">01</span>Your Name</label>
+            <input class="req-input" type="text" id="reqName" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div>
+            <label class="req-label" for="reqPhone"><span class="num">02</span>Phone</label>
+            <input class="req-input" type="tel" id="reqPhone" name="phone" placeholder="(407) 555-0123" required>
+          </div>
+        </div>
+
+        <div class="req-row two">
+          <div>
+            <label class="req-label" for="reqDogName"><span class="num">03</span>Dog's Name</label>
+            <input class="req-input" type="text" id="reqDogName" name="dogName" placeholder="Bella" required>
+          </div>
+          <div>
+            <label class="req-label" for="reqBreed"><span class="num">04</span>Breed</label>
+            <input class="req-input" type="text" id="reqBreed" name="breed" placeholder="Goldendoodle" required>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <label class="req-label"><span class="num">05</span>What service?</label>
+          <div class="req-service-grid">
+            <button type="button" class="req-svc-btn" data-svc="Grooming" onclick="reqPickService(this)">Grooming</button>
+            <button type="button" class="req-svc-btn" data-svc="Daycare" onclick="reqPickService(this)">Daycare</button>
+            <button type="button" class="req-svc-btn" data-svc="Boarding" onclick="reqPickService(this)">Boarding</button>
+            <button type="button" class="req-svc-btn" data-svc="Not sure" onclick="reqPickService(this)">Not sure</button>
+          </div>
+        </div>
+
+        <!-- Conditional: Grooming / Daycare / Not sure -->
+        <div class="req-conditional" id="reqDateBlock">
+          <div class="req-row two">
+            <div>
+              <label class="req-label" for="reqPreferredDate"><span class="num">06</span>Preferred Date</label>
+              <input class="req-input" type="date" id="reqPreferredDate" name="preferredDate">
+            </div>
+            <div>
+              <label class="req-label"><span class="num">07</span>Time of Day</label>
+              <div class="req-time-grid">
+                <button type="button" class="req-time-btn" data-time="Morning" onclick="reqPickTime(this)">Morning</button>
+                <button type="button" class="req-time-btn" data-time="Afternoon" onclick="reqPickTime(this)">Afternoon</button>
+                <button type="button" class="req-time-btn" data-time="Evening" onclick="reqPickTime(this)">Evening</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Conditional: Boarding -->
+        <div class="req-conditional" id="reqBoardingBlock">
+          <div class="req-row two">
+            <div>
+              <label class="req-label" for="reqCheckIn"><span class="num">06</span>Check-in Date</label>
+              <input class="req-input" type="date" id="reqCheckIn" name="checkIn">
+            </div>
+            <div>
+              <label class="req-label" for="reqCheckOut"><span class="num">07</span>Check-out Date</label>
+              <input class="req-input" type="date" id="reqCheckOut" name="checkOut">
+            </div>
+          </div>
+          <div class="req-row">
+            <label class="req-label"><span class="num">08</span>Add-on Services <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
+            <div class="req-addons">
+              <label class="req-addon"><input type="checkbox" value="Bath before pickup"><span>Bath before pickup</span></label>
+              <label class="req-addon"><input type="checkbox" value="Nail trim"><span>Nail trim</span></label>
+              <label class="req-addon"><input type="checkbox" value="Full groom during stay"><span>Full groom during stay</span></label>
+              <label class="req-addon"><input type="checkbox" value="Teeth brushing"><span>Teeth brushing</span></label>
+              <label class="req-addon"><input type="checkbox" value="Medication administration"><span>Medication administration</span></label>
+            </div>
+          </div>
+          <div class="req-row">
+            <label class="req-label" for="reqNotes"><span class="num">09</span>Anything else? <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
+            <textarea class="req-textarea" id="reqNotes" name="notes" placeholder="Special requests, dietary needs, behavior notes, etc."></textarea>
+          </div>
+        </div>
+
+        <button class="req-submit" type="submit" id="reqSubmitBtn">
+          <span>Send Request</span>
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 11L11 1M11 1H4M11 1V8"/></svg>
+        </button>
+
+        <div class="req-status" id="reqStatus"></div>
+      </form>
+    </div>
+
+    <!-- Success view -->
+    <div id="reqSuccessView" style="display:none">
+      <div class="req-success-screen">
+        <div class="req-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12L10 17L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="req-success-title">Request <em class="sw">received.</em></h3>
+        <p class="req-success-msg">Thanks — we'll text or call you back shortly to confirm details and lock in a time. Talk soon! 🐾</p>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>ƒ
