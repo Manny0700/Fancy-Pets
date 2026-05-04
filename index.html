@@ -708,7 +708,17 @@
     .req-success-title{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:400;line-height:1.05;margin-bottom:0.6rem;font-variation-settings:"SOFT" 40}
     .req-success-title .sw{font-style:italic;color:var(--accent);font-variation-settings:"SOFT" 100,"WONK" 1}
     .req-success-msg{font-size:0.95rem;color:var(--ink-soft);line-height:1.6;max-width:380px;margin:0 auto}
-  </style>
+  
+/* Selectable price cards */
+.pg-card.selectable{cursor:pointer}
+.pg-card.selectable.selected{box-shadow:0 0 0 3px var(--accent),0 30px 60px var(--shadow-mid);transform:translateY(-6px)}
+.pg-card.featured.selectable.selected{box-shadow:0 0 0 3px var(--accent-soft),0 40px 80px var(--shadow-deep);transform:translateY(-14px)}
+.pg-card.selectable:hover{transform:translateY(-6px)}
+.pg-card.featured.selectable:hover{transform:translateY(-14px)}
+.pg-check{position:absolute;top:0.9rem;left:0.9rem;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:none;align-items:center;justify-content:center;z-index:3;font-size:14px;font-weight:bold}
+.pg-card.selected .pg-check{display:flex}
+.pg-card.featured .pg-check{background:var(--accent-soft);color:var(--ink)}
+</style>
 </head>
 <body>
 
@@ -1841,7 +1851,8 @@ function lookupBreed() {
     + '<div class="price-grid">';
 
   services.forEach(s => {
-    html += '<div class="pg-card ' + (s.featured ? 'featured' : '') + '">'
+    html += '<div class="pg-card selectable ' + (s.featured ? 'featured selected' : '') + '" data-price="' + s.val + '" data-name="' + s.name + '" onclick="selectService(this)">'
+         + '<div class="pg-check">✓</div>'
          + '<div class="pg-num">Service ' + s.num + '</div>'
          + '<div class="pg-name">' + s.name + '</div>'
          + '<div class="pg-tag">' + s.tag + '</div>'
@@ -1885,6 +1896,20 @@ function lookupBreed() {
   document.getElementById('priceResult').innerHTML = html;
   if (window.innerWidth < 960) {
     setTimeout(() => document.getElementById('priceResult').scrollIntoView({behavior:'smooth', block:'start'}), 100);
+  }
+}
+
+function selectService(cardEl) {
+  // Remove selected from all sibling cards
+  const cards = cardEl.parentNode.querySelectorAll('.pg-card');
+  cards.forEach(c => c.classList.remove('selected'));
+  cardEl.classList.add('selected');
+  // Update the addons grid base price
+  const newPrice = parseFloat(cardEl.dataset.price) || 0;
+  const grid = document.getElementById('addonsGrid');
+  if (grid) {
+    grid.dataset.basePrice = newPrice;
+    updateAddonTotal();
   }
 }
 </script>
