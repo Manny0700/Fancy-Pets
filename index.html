@@ -1229,7 +1229,77 @@
     </div>
   </div>
 </footer>
+<!-- APPOINTMENT REQUEST MODAL -->
+<div class="req-overlay" id="reqOverlay" role="dialog" aria-modal="true" aria-labelledby="reqTitle">
+  <div class="req-modal">
+    <button class="req-close" type="button" onclick="closeReqModal()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6L18 18" stroke-linecap="round"/></svg>
+    </button>
 
+    <!-- Form view -->
+    <div id="reqFormView">
+      <div class="req-header">
+        <div class="req-eyebrow">Request an Appointment</div>
+        <h3 class="req-title" id="reqTitle">Tell us about your <em class="sw">pup.</em></h3>
+        <p class="req-sub">A few quick details and we'll text or call you back to confirm. We typically respond within an hour during business hours.</p>
+      </div>
+
+      <form class="req-form" id="reqForm" novalidate>
+        <!-- Honeypot for spam bots — hidden from real users -->
+        <div class="req-honeypot" aria-hidden="true">
+          <label for="reqWebsite">Website (leave blank)</label>
+          <input type="text" id="reqWebsite" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="req-row two">
+          <div>
+            <label class="req-label" for="reqName"><span class="num">01</span>Your Name</label>
+            <input class="req-input" type="text" id="reqName" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div>
+            <label class="req-label" for="reqPhone"><span class="num">02</span>Phone</label>
+            <input class="req-input" type="tel" id="reqPhone" name="phone" placeholder="(407) 555-0123" required>
+          </div>
+        </div>
+
+        <div class="req-row two">
+          <div>
+            <label class="req-label" for="reqDogName"><span class="num">03</span>Dog's Name</label>
+            <input class="req-input" type="text" id="reqDogName" name="dogName" placeholder="Bella" required>
+          </div>
+          <div>
+            <label class="req-label" for="reqBreed"><span class="num">04</span>Breed</label>
+            <input class="req-input" type="text" id="reqBreed" name="breed" placeholder="Goldendoodle" required>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <label class="req-label"><span class="num">05</span>What service?</label>
+          <div class="req-service-grid">
+            <button type="button" class="req-svc-btn" data-svc="Grooming" onclick="reqPickService(this)">Grooming</button>
+            <button type="button" class="req-svc-btn" data-svc="Daycare" onclick="reqPickService(this)">Daycare</button>
+            <button type="button" class="req-svc-btn" data-svc="Boarding" onclick="reqPickService(this)">Boarding</button>
+            <button type="button" class="req-svc-btn" data-svc="Not sure" onclick="reqPickService(this)">Not sure</button>
+          </div>
+        </div>
+
+        <!-- Conditional: Grooming / Daycare / Not sure -->
+        <div class="req-conditional" id="reqDateBlock">
+          <div class="req-row two">
+            <div>
+              <label class="req-label" for="reqPreferredDate"><span class="num">06</span>Preferred Date</label>
+              <input class="req-input" type="date" id="reqPreferredDate" name="preferredDate">
+            </div>
+            <div>
+              <label class="req-label"><span class="num">07</span>Time of Day</label>
+              <div class="req-time-grid">
+                <button type="button" class="req-time-btn" data-time="Morning" onclick="reqPickTime(this)">Morning</button>
+                <button type="button" class="req-time-btn" data-time="Afternoon" onclick="reqPickTime(this)">Afternoon</button>
+                <button type="button" class="req-time-btn" data-time="Evening" onclick="reqPickTime(this)">Evening</button>
+              </div>
+            </div>
+          </div>
+        </div>
 <script>
 /* ========================================= THEME DETECTION ========================================= */
 function getThemeInfo() {
@@ -1768,6 +1838,8 @@ function lookupBreed() {
   }
 }
  /* ========================================= APPOINTMENT REQUEST MODAL ========================================= */
+document.addEventListener('DOMContentLoaded', () => {
+
 let reqSelectedService = null;
 let reqSelectedTime = null;
 
@@ -1901,6 +1973,7 @@ document.querySelectorAll(
     openReqModal();
   });
 });
+});
 </script>
  <!-- APPOINTMENT REQUEST MODAL -->
 <div class="req-overlay" id="reqOverlay" role="dialog" aria-modal="true" aria-labelledby="reqTitle">
@@ -2012,6 +2085,122 @@ document.querySelectorAll(
     </div>
 
     <!-- Success view -->
+    <div id="reqSuccessView" style="display:none">
+      <div class="req-success-screen">
+        <div class="req-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12L10 17L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="req-success-title">Request <em class="sw">received.</em></h3>
+        <p class="req-success-msg">Thanks — we'll text or call you back shortly to confirm details and lock in a time. Talk soon! 🐾</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- APPOINTMENT REQUEST MODAL -->
+<div class="req-overlay" id="reqOverlay" role="dialog" aria-modal="true" aria-labelledby="reqTitle">
+  <div class="req-modal">
+    <button class="req-close" type="button" onclick="closeReqModal()" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6L18 18" stroke-linecap="round"/></svg>
+    </button>
+
+    <div id="reqFormView">
+      <div class="req-header">
+        <div class="req-eyebrow">Request an Appointment</div>
+        <h3 class="req-title" id="reqTitle">Tell us about your <em class="sw">pup.</em></h3>
+        <p class="req-sub">A few quick details and we'll text or call you back to confirm. We typically respond within an hour during business hours.</p>
+      </div>
+
+      <form class="req-form" id="reqForm" novalidate>
+        <div class="req-honeypot" aria-hidden="true">
+          <label for="reqWebsite">Website (leave blank)</label>
+          <input type="text" id="reqWebsite" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="req-row two">
+          <div>
+            <label class="req-label" for="reqName"><span class="num">01</span>Your Name</label>
+            <input class="req-input" type="text" id="reqName" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div>
+            <label class="req-label" for="reqPhone"><span class="num">02</span>Phone</label>
+            <input class="req-input" type="tel" id="reqPhone" name="phone" placeholder="(407) 555-0123" required>
+          </div>
+        </div>
+
+        <div class="req-row two">
+          <div>
+            <label class="req-label" for="reqDogName"><span class="num">03</span>Dog's Name</label>
+            <input class="req-input" type="text" id="reqDogName" name="dogName" placeholder="Bella" required>
+          </div>
+          <div>
+            <label class="req-label" for="reqBreed"><span class="num">04</span>Breed</label>
+            <input class="req-input" type="text" id="reqBreed" name="breed" placeholder="Goldendoodle" required>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <label class="req-label"><span class="num">05</span>What service?</label>
+          <div class="req-service-grid">
+            <button type="button" class="req-svc-btn" data-svc="Grooming" onclick="reqPickService(this)">Grooming</button>
+            <button type="button" class="req-svc-btn" data-svc="Daycare" onclick="reqPickService(this)">Daycare</button>
+            <button type="button" class="req-svc-btn" data-svc="Boarding" onclick="reqPickService(this)">Boarding</button>
+            <button type="button" class="req-svc-btn" data-svc="Not sure" onclick="reqPickService(this)">Not sure</button>
+          </div>
+        </div>
+
+        <div class="req-conditional" id="reqDateBlock">
+          <div class="req-row two">
+            <div>
+              <label class="req-label" for="reqPreferredDate"><span class="num">06</span>Preferred Date</label>
+              <input class="req-input" type="date" id="reqPreferredDate" name="preferredDate">
+            </div>
+            <div>
+              <label class="req-label"><span class="num">07</span>Time of Day</label>
+              <div class="req-time-grid">
+                <button type="button" class="req-time-btn" data-time="Morning" onclick="reqPickTime(this)">Morning</button>
+                <button type="button" class="req-time-btn" data-time="Afternoon" onclick="reqPickTime(this)">Afternoon</button>
+                <button type="button" class="req-time-btn" data-time="Evening" onclick="reqPickTime(this)">Evening</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="req-conditional" id="reqBoardingBlock">
+          <div class="req-row two">
+            <div>
+              <label class="req-label" for="reqCheckIn"><span class="num">06</span>Check-in Date</label>
+              <input class="req-input" type="date" id="reqCheckIn" name="checkIn">
+            </div>
+            <div>
+              <label class="req-label" for="reqCheckOut"><span class="num">07</span>Check-out Date</label>
+              <input class="req-input" type="date" id="reqCheckOut" name="checkOut">
+            </div>
+          </div>
+          <div class="req-row">
+            <label class="req-label"><span class="num">08</span>Add-on Services <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
+            <div class="req-addons">
+              <label class="req-addon"><input type="checkbox" value="Bath before pickup"><span>Bath before pickup</span></label>
+              <label class="req-addon"><input type="checkbox" value="Nail trim"><span>Nail trim</span></label>
+              <label class="req-addon"><input type="checkbox" value="Full groom during stay"><span>Full groom during stay</span></label>
+              <label class="req-addon"><input type="checkbox" value="Teeth brushing"><span>Teeth brushing</span></label>
+              <label class="req-addon"><input type="checkbox" value="Medication administration"><span>Medication administration</span></label>
+            </div>
+          </div>
+          <div class="req-row">
+            <label class="req-label" for="reqNotes"><span class="num">09</span>Anything else? <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
+            <textarea class="req-textarea" id="reqNotes" name="notes" placeholder="Special requests, dietary needs, behavior notes, etc."></textarea>
+          </div>
+        </div>
+
+        <button class="req-submit" type="submit" id="reqSubmitBtn">
+          <span>Send Request</span>
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 11L11 1M11 1H4M11 1V8"/></svg>
+        </button>
+
+        <div class="req-status" id="reqStatus"></div>
+      </form>
+    </div>
+
     <div id="reqSuccessView" style="display:none">
       <div class="req-success-screen">
         <div class="req-success-icon">
