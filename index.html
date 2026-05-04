@@ -718,6 +718,14 @@
 .pg-check{position:absolute;top:0.9rem;left:0.9rem;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:none;align-items:center;justify-content:center;z-index:3;font-size:14px;font-weight:bold}
 .pg-card.selected .pg-check{display:flex}
 .pg-card.featured .pg-check{background:var(--accent-soft);color:var(--ink)}
+
+/* Facebook follow link with icon */
+.fb-link{display:inline-flex;align-items:center;gap:0.6rem;padding:0.55rem 0.85rem;border:1px solid var(--border);border-radius:6px;transition:all 0.25s ease;color:inherit;text-decoration:none;line-height:1.25}
+.fb-link:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:translateY(-1px)}
+.fb-icon{width:18px;height:18px;flex-shrink:0;color:#1877f2;transition:color 0.25s ease}
+.fb-link:hover .fb-icon{color:var(--bg)}
+.fb-arrow{width:9px;height:9px;flex-shrink:0;opacity:0.5;transition:opacity 0.25s ease,transform 0.25s ease}
+.fb-link:hover .fb-arrow{opacity:1;transform:translate(2px,-2px)}
 </style>
 </head>
 <body>
@@ -1199,7 +1207,11 @@
       </div>
       <div class="cta-meta-item">
         <div class="label">Follow</div>
-        <div class="val"><a href="https://www.facebook.com/fancypetslakemaryfl" target="_blank" rel="noopener">Fancy Pets<br>on Facebook</a></div>
+        <div class="val"><a href="https://www.facebook.com/fancypetslakemaryfl" target="_blank" rel="noopener" class="fb-link">
+          <svg class="fb-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/></svg>
+          <span>Fancy Pets<br>on Facebook</span>
+          <svg class="fb-arrow" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M1 11L11 1M11 1H4M11 1V8"/></svg>
+        </a></div>
       </div>
     </div>
   </div>
