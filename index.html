@@ -1229,6 +1229,7 @@
     </div>
   </div>
 </footer>
+
 <!-- APPOINTMENT REQUEST MODAL -->
 <div class="req-overlay" id="reqOverlay" role="dialog" aria-modal="true" aria-labelledby="reqTitle">
   <div class="req-modal">
@@ -1236,7 +1237,6 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6L18 18" stroke-linecap="round"/></svg>
     </button>
 
-    <!-- Form view -->
     <div id="reqFormView">
       <div class="req-header">
         <div class="req-eyebrow">Request an Appointment</div>
@@ -1245,7 +1245,6 @@
       </div>
 
       <form class="req-form" id="reqForm" novalidate>
-        <!-- Honeypot for spam bots — hidden from real users -->
         <div class="req-honeypot" aria-hidden="true">
           <label for="reqWebsite">Website (leave blank)</label>
           <input type="text" id="reqWebsite" name="website" tabindex="-1" autocomplete="off">
@@ -1283,7 +1282,6 @@
           </div>
         </div>
 
-        <!-- Conditional: Grooming / Daycare / Not sure -->
         <div class="req-conditional" id="reqDateBlock">
           <div class="req-row two">
             <div>
@@ -1300,6 +1298,54 @@
             </div>
           </div>
         </div>
+
+        <div class="req-conditional" id="reqBoardingBlock">
+          <div class="req-row two">
+            <div>
+              <label class="req-label" for="reqCheckIn"><span class="num">06</span>Check-in Date</label>
+              <input class="req-input" type="date" id="reqCheckIn" name="checkIn">
+            </div>
+            <div>
+              <label class="req-label" for="reqCheckOut"><span class="num">07</span>Check-out Date</label>
+              <input class="req-input" type="date" id="reqCheckOut" name="checkOut">
+            </div>
+          </div>
+          <div class="req-row">
+            <label class="req-label"><span class="num">08</span>Add-on Services <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
+            <div class="req-addons">
+              <label class="req-addon"><input type="checkbox" value="Bath before pickup"><span>Bath before pickup</span></label>
+              <label class="req-addon"><input type="checkbox" value="Nail trim"><span>Nail trim</span></label>
+              <label class="req-addon"><input type="checkbox" value="Full groom during stay"><span>Full groom during stay</span></label>
+              <label class="req-addon"><input type="checkbox" value="Teeth brushing"><span>Teeth brushing</span></label>
+              <label class="req-addon"><input type="checkbox" value="Medication administration"><span>Medication administration</span></label>
+            </div>
+          </div>
+          <div class="req-row">
+            <label class="req-label" for="reqNotes"><span class="num">09</span>Anything else? <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
+            <textarea class="req-textarea" id="reqNotes" name="notes" placeholder="Special requests, dietary needs, behavior notes, etc."></textarea>
+          </div>
+        </div>
+
+        <button class="req-submit" type="submit" id="reqSubmitBtn">
+          <span>Send Request</span>
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 11L11 1M11 1H4M11 1V8"/></svg>
+        </button>
+
+        <div class="req-status" id="reqStatus"></div>
+      </form>
+    </div>
+
+    <div id="reqSuccessView" style="display:none">
+      <div class="req-success-screen">
+        <div class="req-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12L10 17L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="req-success-title">Request <em class="sw">received.</em></h3>
+        <p class="req-success-msg">Thanks — we'll text or call you back shortly to confirm details and lock in a time. Talk soon! 🐾</p>
+      </div>
+    </div>
+  </div>
+</div>
 <script>
 /* ========================================= THEME DETECTION ========================================= */
 function getThemeInfo() {
@@ -1837,380 +1883,149 @@ function lookupBreed() {
     setTimeout(() => document.getElementById('priceResult').scrollIntoView({behavior:'smooth', block:'start'}), 100);
   }
 }
- /* ========================================= APPOINTMENT REQUEST MODAL ========================================= */
-document.addEventListener('DOMContentLoaded', () => {
+</script>
 
-let reqSelectedService = null;
-let reqSelectedTime = null;
+<script>
+/* APPOINTMENT REQUEST MODAL — clean version with global functions */
+(function() {
+  let reqSelectedService = null;
+  let reqSelectedTime = null;
 
-function openReqModal() {
-  document.getElementById('reqOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  document.getElementById('reqFormView').style.display = '';
-  document.getElementById('reqSuccessView').style.display = 'none';
-}
-
-function closeReqModal() {
-  document.getElementById('reqOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('reqOverlay').addEventListener('click', (e) => {
-  if (e.target.id === 'reqOverlay') closeReqModal();
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && document.getElementById('reqOverlay').classList.contains('open')) {
-    closeReqModal();
-  }
-});
-
-function reqPickService(btn) {
-  document.querySelectorAll('.req-svc-btn').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  reqSelectedService = btn.dataset.svc;
-
-  const dateBlock = document.getElementById('reqDateBlock');
-  const boardingBlock = document.getElementById('reqBoardingBlock');
-  if (reqSelectedService === 'Boarding') {
-    dateBlock.classList.remove('show');
-    boardingBlock.classList.add('show');
-  } else {
-    boardingBlock.classList.remove('show');
-    dateBlock.classList.add('show');
-  }
-}
-
-function reqPickTime(btn) {
-  document.querySelectorAll('.req-time-btn').forEach(b => b.classList.remove('on'));
-  btn.classList.add('on');
-  reqSelectedTime = btn.dataset.time;
-}
-
-document.querySelectorAll('.req-addon input[type=checkbox]').forEach(cb => {
-  cb.addEventListener('change', () => {
-    cb.closest('.req-addon').classList.toggle('checked', cb.checked);
-  });
-});
-
-document.getElementById('reqForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const status = document.getElementById('reqStatus');
-  const submitBtn = document.getElementById('reqSubmitBtn');
-  status.classList.remove('show', 'error', 'success');
-
-  if (!reqSelectedService) {
-    status.textContent = 'Please choose a service.';
-    status.classList.add('show', 'error');
-    return;
-  }
-
-  const payload = {
-    name: document.getElementById('reqName').value.trim(),
-    phone: document.getElementById('reqPhone').value.trim(),
-    dogName: document.getElementById('reqDogName').value.trim(),
-    breed: document.getElementById('reqBreed').value.trim(),
-    service: reqSelectedService,
-    website: document.getElementById('reqWebsite').value,
+  window.openReqModal = function() {
+    document.getElementById('reqOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('reqFormView').style.display = '';
+    document.getElementById('reqSuccessView').style.display = 'none';
   };
 
-  if (reqSelectedService === 'Boarding') {
-    payload.checkIn = document.getElementById('reqCheckIn').value;
-    payload.checkOut = document.getElementById('reqCheckOut').value;
-    payload.addons = Array.from(document.querySelectorAll('.req-addon input[type=checkbox]:checked')).map(cb => cb.value);
-    payload.notes = document.getElementById('reqNotes').value.trim();
-  } else {
-    payload.preferredDate = document.getElementById('reqPreferredDate').value;
-    payload.timeOfDay = reqSelectedTime || '';
-  }
+  window.closeReqModal = function() {
+    document.getElementById('reqOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+  };
 
-  if (!payload.name || !payload.phone || !payload.dogName || !payload.breed) {
-    status.textContent = 'Please fill in name, phone, dog\'s name, and breed.';
-    status.classList.add('show', 'error');
-    return;
-  }
+  window.reqPickService = function(btn) {
+    document.querySelectorAll('.req-svc-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    reqSelectedService = btn.dataset.svc;
+    const dateBlock = document.getElementById('reqDateBlock');
+    const boardingBlock = document.getElementById('reqBoardingBlock');
+    if (reqSelectedService === 'Boarding') {
+      dateBlock.classList.remove('show');
+      boardingBlock.classList.add('show');
+    } else {
+      boardingBlock.classList.remove('show');
+      dateBlock.classList.add('show');
+    }
+  };
 
-  submitBtn.disabled = true;
-  submitBtn.querySelector('span').textContent = 'Sending…';
+  window.reqPickTime = function(btn) {
+    document.querySelectorAll('.req-time-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    reqSelectedTime = btn.dataset.time;
+  };
 
-  try {
-    const res = await fetch('/api/request-appointment', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+  document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('reqOverlay');
+    if (!overlay) return;
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target.id === 'reqOverlay') window.closeReqModal();
     });
 
-    if (res.ok) {
-      document.getElementById('reqFormView').style.display = 'none';
-      document.getElementById('reqSuccessView').style.display = '';
-      document.getElementById('reqForm').reset();
-      document.querySelectorAll('.req-svc-btn,.req-time-btn').forEach(b => b.classList.remove('on'));
-      document.querySelectorAll('.req-addon').forEach(a => a.classList.remove('checked'));
-      reqSelectedService = null;
-      reqSelectedTime = null;
-      document.getElementById('reqDateBlock').classList.remove('show');
-      document.getElementById('reqBoardingBlock').classList.remove('show');
-    } else {
-      const errData = await res.json().catch(() => ({}));
-      status.textContent = errData.error || 'Something went wrong. Please call us at (407) 833-3880.';
-      status.classList.add('show', 'error');
-    }
-  } catch (err) {
-    status.textContent = 'Network error. Please call us at (407) 833-3880.';
-    status.classList.add('show', 'error');
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.querySelector('span').textContent = 'Send Request';
-  }
-});
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) {
+        window.closeReqModal();
+      }
+    });
 
-// Wire up Book Now / Get an Estimate buttons
-document.querySelectorAll(
-  '.nav-cta, .hero-btns .btn-primary, .cta-btns .btn-primary, .res-book'
-).forEach(el => {
-  el.addEventListener('click', (e) => {
-    e.preventDefault();
-    openReqModal();
+    document.querySelectorAll('.req-addon input[type=checkbox]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        cb.closest('.req-addon').classList.toggle('checked', cb.checked);
+      });
+    });
+
+    document.getElementById('reqForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const status = document.getElementById('reqStatus');
+      const submitBtn = document.getElementById('reqSubmitBtn');
+      status.classList.remove('show', 'error', 'success');
+
+      if (!reqSelectedService) {
+        status.textContent = 'Please choose a service.';
+        status.classList.add('show', 'error');
+        return;
+      }
+
+      const payload = {
+        name: document.getElementById('reqName').value.trim(),
+        phone: document.getElementById('reqPhone').value.trim(),
+        dogName: document.getElementById('reqDogName').value.trim(),
+        breed: document.getElementById('reqBreed').value.trim(),
+        service: reqSelectedService,
+        website: document.getElementById('reqWebsite').value,
+      };
+
+      if (reqSelectedService === 'Boarding') {
+        payload.checkIn = document.getElementById('reqCheckIn').value;
+        payload.checkOut = document.getElementById('reqCheckOut').value;
+        payload.addons = Array.from(document.querySelectorAll('.req-addon input[type=checkbox]:checked')).map(cb => cb.value);
+        payload.notes = document.getElementById('reqNotes').value.trim();
+      } else {
+        payload.preferredDate = document.getElementById('reqPreferredDate').value;
+        payload.timeOfDay = reqSelectedTime || '';
+      }
+
+      if (!payload.name || !payload.phone || !payload.dogName || !payload.breed) {
+        status.textContent = "Please fill in name, phone, dog's name, and breed.";
+        status.classList.add('show', 'error');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.querySelector('span').textContent = 'Sending…';
+
+      try {
+        const res = await fetch('/api/request-appointment', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          document.getElementById('reqFormView').style.display = 'none';
+          document.getElementById('reqSuccessView').style.display = '';
+          document.getElementById('reqForm').reset();
+          document.querySelectorAll('.req-svc-btn,.req-time-btn').forEach(b => b.classList.remove('on'));
+          document.querySelectorAll('.req-addon').forEach(a => a.classList.remove('checked'));
+          reqSelectedService = null;
+          reqSelectedTime = null;
+          document.getElementById('reqDateBlock').classList.remove('show');
+          document.getElementById('reqBoardingBlock').classList.remove('show');
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          status.textContent = errData.error || 'Something went wrong. Please call us at (407) 833-3880.';
+          status.classList.add('show', 'error');
+        }
+      } catch (err) {
+        status.textContent = 'Network error. Please call us at (407) 833-3880.';
+        status.classList.add('show', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.querySelector('span').textContent = 'Send Request';
+      }
+    });
+
+    document.querySelectorAll(
+      '.nav-cta, .hero-btns .btn-primary, .cta-btns .btn-primary, .res-book'
+    ).forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        window.openReqModal();
+      });
+    });
   });
-});
-});
+})();
 </script>
- <!-- APPOINTMENT REQUEST MODAL -->
-<div class="req-overlay" id="reqOverlay" role="dialog" aria-modal="true" aria-labelledby="reqTitle">
-  <div class="req-modal">
-    <button class="req-close" type="button" onclick="closeReqModal()" aria-label="Close">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6L18 18" stroke-linecap="round"/></svg>
-    </button>
 
-    <!-- Form view -->
-    <div id="reqFormView">
-      <div class="req-header">
-        <div class="req-eyebrow">Request an Appointment</div>
-        <h3 class="req-title" id="reqTitle">Tell us about your <em class="sw">pup.</em></h3>
-        <p class="req-sub">A few quick details and we'll text or call you back to confirm. We typically respond within an hour during business hours.</p>
-      </div>
-
-      <form class="req-form" id="reqForm" novalidate>
-        <!-- Honeypot for spam bots — hidden from real users -->
-        <div class="req-honeypot" aria-hidden="true">
-          <label for="reqWebsite">Website (leave blank)</label>
-          <input type="text" id="reqWebsite" name="website" tabindex="-1" autocomplete="off">
-        </div>
-
-        <div class="req-row two">
-          <div>
-            <label class="req-label" for="reqName"><span class="num">01</span>Your Name</label>
-            <input class="req-input" type="text" id="reqName" name="name" placeholder="Jane Smith" required>
-          </div>
-          <div>
-            <label class="req-label" for="reqPhone"><span class="num">02</span>Phone</label>
-            <input class="req-input" type="tel" id="reqPhone" name="phone" placeholder="(407) 555-0123" required>
-          </div>
-        </div>
-
-        <div class="req-row two">
-          <div>
-            <label class="req-label" for="reqDogName"><span class="num">03</span>Dog's Name</label>
-            <input class="req-input" type="text" id="reqDogName" name="dogName" placeholder="Bella" required>
-          </div>
-          <div>
-            <label class="req-label" for="reqBreed"><span class="num">04</span>Breed</label>
-            <input class="req-input" type="text" id="reqBreed" name="breed" placeholder="Goldendoodle" required>
-          </div>
-        </div>
-
-        <div class="req-row">
-          <label class="req-label"><span class="num">05</span>What service?</label>
-          <div class="req-service-grid">
-            <button type="button" class="req-svc-btn" data-svc="Grooming" onclick="reqPickService(this)">Grooming</button>
-            <button type="button" class="req-svc-btn" data-svc="Daycare" onclick="reqPickService(this)">Daycare</button>
-            <button type="button" class="req-svc-btn" data-svc="Boarding" onclick="reqPickService(this)">Boarding</button>
-            <button type="button" class="req-svc-btn" data-svc="Not sure" onclick="reqPickService(this)">Not sure</button>
-          </div>
-        </div>
-
-        <!-- Conditional: Grooming / Daycare / Not sure -->
-        <div class="req-conditional" id="reqDateBlock">
-          <div class="req-row two">
-            <div>
-              <label class="req-label" for="reqPreferredDate"><span class="num">06</span>Preferred Date</label>
-              <input class="req-input" type="date" id="reqPreferredDate" name="preferredDate">
-            </div>
-            <div>
-              <label class="req-label"><span class="num">07</span>Time of Day</label>
-              <div class="req-time-grid">
-                <button type="button" class="req-time-btn" data-time="Morning" onclick="reqPickTime(this)">Morning</button>
-                <button type="button" class="req-time-btn" data-time="Afternoon" onclick="reqPickTime(this)">Afternoon</button>
-                <button type="button" class="req-time-btn" data-time="Evening" onclick="reqPickTime(this)">Evening</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Conditional: Boarding -->
-        <div class="req-conditional" id="reqBoardingBlock">
-          <div class="req-row two">
-            <div>
-              <label class="req-label" for="reqCheckIn"><span class="num">06</span>Check-in Date</label>
-              <input class="req-input" type="date" id="reqCheckIn" name="checkIn">
-            </div>
-            <div>
-              <label class="req-label" for="reqCheckOut"><span class="num">07</span>Check-out Date</label>
-              <input class="req-input" type="date" id="reqCheckOut" name="checkOut">
-            </div>
-          </div>
-          <div class="req-row">
-            <label class="req-label"><span class="num">08</span>Add-on Services <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
-            <div class="req-addons">
-              <label class="req-addon"><input type="checkbox" value="Bath before pickup"><span>Bath before pickup</span></label>
-              <label class="req-addon"><input type="checkbox" value="Nail trim"><span>Nail trim</span></label>
-              <label class="req-addon"><input type="checkbox" value="Full groom during stay"><span>Full groom during stay</span></label>
-              <label class="req-addon"><input type="checkbox" value="Teeth brushing"><span>Teeth brushing</span></label>
-              <label class="req-addon"><input type="checkbox" value="Medication administration"><span>Medication administration</span></label>
-            </div>
-          </div>
-          <div class="req-row">
-            <label class="req-label" for="reqNotes"><span class="num">09</span>Anything else? <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
-            <textarea class="req-textarea" id="reqNotes" name="notes" placeholder="Special requests, dietary needs, behavior notes, etc."></textarea>
-          </div>
-        </div>
-
-        <button class="req-submit" type="submit" id="reqSubmitBtn">
-          <span>Send Request</span>
-          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 11L11 1M11 1H4M11 1V8"/></svg>
-        </button>
-
-        <div class="req-status" id="reqStatus"></div>
-      </form>
-    </div>
-
-    <!-- Success view -->
-    <div id="reqSuccessView" style="display:none">
-      <div class="req-success-screen">
-        <div class="req-success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12L10 17L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3 class="req-success-title">Request <em class="sw">received.</em></h3>
-        <p class="req-success-msg">Thanks — we'll text or call you back shortly to confirm details and lock in a time. Talk soon! 🐾</p>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- APPOINTMENT REQUEST MODAL -->
-<div class="req-overlay" id="reqOverlay" role="dialog" aria-modal="true" aria-labelledby="reqTitle">
-  <div class="req-modal">
-    <button class="req-close" type="button" onclick="closeReqModal()" aria-label="Close">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6L18 18" stroke-linecap="round"/></svg>
-    </button>
-
-    <div id="reqFormView">
-      <div class="req-header">
-        <div class="req-eyebrow">Request an Appointment</div>
-        <h3 class="req-title" id="reqTitle">Tell us about your <em class="sw">pup.</em></h3>
-        <p class="req-sub">A few quick details and we'll text or call you back to confirm. We typically respond within an hour during business hours.</p>
-      </div>
-
-      <form class="req-form" id="reqForm" novalidate>
-        <div class="req-honeypot" aria-hidden="true">
-          <label for="reqWebsite">Website (leave blank)</label>
-          <input type="text" id="reqWebsite" name="website" tabindex="-1" autocomplete="off">
-        </div>
-
-        <div class="req-row two">
-          <div>
-            <label class="req-label" for="reqName"><span class="num">01</span>Your Name</label>
-            <input class="req-input" type="text" id="reqName" name="name" placeholder="Jane Smith" required>
-          </div>
-          <div>
-            <label class="req-label" for="reqPhone"><span class="num">02</span>Phone</label>
-            <input class="req-input" type="tel" id="reqPhone" name="phone" placeholder="(407) 555-0123" required>
-          </div>
-        </div>
-
-        <div class="req-row two">
-          <div>
-            <label class="req-label" for="reqDogName"><span class="num">03</span>Dog's Name</label>
-            <input class="req-input" type="text" id="reqDogName" name="dogName" placeholder="Bella" required>
-          </div>
-          <div>
-            <label class="req-label" for="reqBreed"><span class="num">04</span>Breed</label>
-            <input class="req-input" type="text" id="reqBreed" name="breed" placeholder="Goldendoodle" required>
-          </div>
-        </div>
-
-        <div class="req-row">
-          <label class="req-label"><span class="num">05</span>What service?</label>
-          <div class="req-service-grid">
-            <button type="button" class="req-svc-btn" data-svc="Grooming" onclick="reqPickService(this)">Grooming</button>
-            <button type="button" class="req-svc-btn" data-svc="Daycare" onclick="reqPickService(this)">Daycare</button>
-            <button type="button" class="req-svc-btn" data-svc="Boarding" onclick="reqPickService(this)">Boarding</button>
-            <button type="button" class="req-svc-btn" data-svc="Not sure" onclick="reqPickService(this)">Not sure</button>
-          </div>
-        </div>
-
-        <div class="req-conditional" id="reqDateBlock">
-          <div class="req-row two">
-            <div>
-              <label class="req-label" for="reqPreferredDate"><span class="num">06</span>Preferred Date</label>
-              <input class="req-input" type="date" id="reqPreferredDate" name="preferredDate">
-            </div>
-            <div>
-              <label class="req-label"><span class="num">07</span>Time of Day</label>
-              <div class="req-time-grid">
-                <button type="button" class="req-time-btn" data-time="Morning" onclick="reqPickTime(this)">Morning</button>
-                <button type="button" class="req-time-btn" data-time="Afternoon" onclick="reqPickTime(this)">Afternoon</button>
-                <button type="button" class="req-time-btn" data-time="Evening" onclick="reqPickTime(this)">Evening</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="req-conditional" id="reqBoardingBlock">
-          <div class="req-row two">
-            <div>
-              <label class="req-label" for="reqCheckIn"><span class="num">06</span>Check-in Date</label>
-              <input class="req-input" type="date" id="reqCheckIn" name="checkIn">
-            </div>
-            <div>
-              <label class="req-label" for="reqCheckOut"><span class="num">07</span>Check-out Date</label>
-              <input class="req-input" type="date" id="reqCheckOut" name="checkOut">
-            </div>
-          </div>
-          <div class="req-row">
-            <label class="req-label"><span class="num">08</span>Add-on Services <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
-            <div class="req-addons">
-              <label class="req-addon"><input type="checkbox" value="Bath before pickup"><span>Bath before pickup</span></label>
-              <label class="req-addon"><input type="checkbox" value="Nail trim"><span>Nail trim</span></label>
-              <label class="req-addon"><input type="checkbox" value="Full groom during stay"><span>Full groom during stay</span></label>
-              <label class="req-addon"><input type="checkbox" value="Teeth brushing"><span>Teeth brushing</span></label>
-              <label class="req-addon"><input type="checkbox" value="Medication administration"><span>Medication administration</span></label>
-            </div>
-          </div>
-          <div class="req-row">
-            <label class="req-label" for="reqNotes"><span class="num">09</span>Anything else? <span style="text-transform:none;letter-spacing:0;color:var(--ink-muted);font-weight:400;margin-left:0.4rem">(optional)</span></label>
-            <textarea class="req-textarea" id="reqNotes" name="notes" placeholder="Special requests, dietary needs, behavior notes, etc."></textarea>
-          </div>
-        </div>
-
-        <button class="req-submit" type="submit" id="reqSubmitBtn">
-          <span>Send Request</span>
-          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 11L11 1M11 1H4M11 1V8"/></svg>
-        </button>
-
-        <div class="req-status" id="reqStatus"></div>
-      </form>
-    </div>
-
-    <div id="reqSuccessView" style="display:none">
-      <div class="req-success-screen">
-        <div class="req-success-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12L10 17L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3 class="req-success-title">Request <em class="sw">received.</em></h3>
-        <p class="req-success-msg">Thanks — we'll text or call you back shortly to confirm details and lock in a time. Talk soon! 🐾</p>
-      </div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
