@@ -459,7 +459,7 @@
     .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     @media(max-width:780px){.price-grid{grid-template-columns:1fr}}
     .pg-card{background:var(--paper);border:1px solid var(--line-soft);border-radius:2px;padding:2rem 1.8rem;position:relative;transition:transform 0.5s var(--ease-out-expo),border-color 0.4s ease,box-shadow 0.5s ease;display:flex;flex-direction:column;overflow:visible}
-    .pg-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,var(--accent-soft) 0%,transparent 60%);opacity:0;transition:opacity 0.5s ease;pointer-events:none}
+    .pg-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top right,var(--accent-soft) 0%,transparent 60%);opacity:0;transition:opacity 0.5s ease;pointer-events:none;border-radius:2px}
     .pg-card:hover{transform:translateY(-6px);border-color:var(--accent);box-shadow:0 30px 60px var(--shadow-mid)}
     .pg-card:hover::before{opacity:0.12}
     .pg-card.featured{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:translateY(-8px)}
