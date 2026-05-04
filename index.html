@@ -1851,7 +1851,7 @@ function lookupBreed() {
     + '<div class="price-grid">';
 
   services.forEach(s => {
-    html += '<div class="pg-card selectable ' + (s.featured ? 'featured selected' : '') + '" data-price="' + s.val + '" data-name="' + s.name + '" onclick="selectService(this)">'
+    html += '<div class="pg-card selectable ' + (s.featured ? 'featured selected' : '') + '" data-price="' + s.val + '" onclick="selectService(this)">'
          + '<div class="pg-check">✓</div>'
          + '<div class="pg-num">Service ' + s.num + '</div>'
          + '<div class="pg-name">' + s.name + '</div>'
