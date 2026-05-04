@@ -1279,7 +1279,7 @@
           </div>
           <div>
             <label class="req-label" for="reqPhone"><span class="num">02</span>Phone</label>
-            <input class="req-input" type="tel" id="reqPhone" name="phone" placeholder="(407) 555-0123" required>
+            <input class="req-input" type="tel" id="reqPhone" name="phone" placeholder="(407) 555-0123" inputmode="tel" autocomplete="tel" required>
           </div>
         </div>
 
@@ -1985,6 +1985,25 @@ function selectService(cardEl) {
       });
     });
 
+    // Auto-format phone as user types: (XXX) XXX-XXXX
+    const phoneInput = document.getElementById('reqPhone');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', (e) => {
+        let digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+        let formatted = '';
+        if (digits.length === 0) {
+          formatted = '';
+        } else if (digits.length <= 3) {
+          formatted = '(' + digits;
+        } else if (digits.length <= 6) {
+          formatted = '(' + digits.slice(0, 3) + ') ' + digits.slice(3);
+        } else {
+          formatted = '(' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6);
+        }
+        e.target.value = formatted;
+      });
+    }
+
     document.getElementById('reqForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const status = document.getElementById('reqStatus');
@@ -2021,6 +2040,17 @@ function selectService(cardEl) {
         status.classList.add('show', 'error');
         return;
       }
+
+      // Validate 10-digit phone (strip everything non-numeric, then check length)
+      const phoneDigits = payload.phone.replace(/\D/g, '');
+      if (phoneDigits.length !== 10) {
+        status.textContent = 'Please enter a valid 10-digit phone number.';
+        status.classList.add('show', 'error');
+        document.getElementById('reqPhone').focus();
+        return;
+      }
+      // Send back the cleaned digits-only version for cleaner emails
+      payload.phone = phoneDigits;
 
       submitBtn.disabled = true;
       submitBtn.querySelector('span').textContent = 'Sending…';
@@ -2069,4 +2099,4 @@ function selectService(cardEl) {
 </script>
 
 </body>
-</html>
+</html> 
