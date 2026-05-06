@@ -2151,7 +2151,7 @@ function selectService(cardEl) {
 
     // Use event delegation so dynamically-added .res-book buttons also work
     document.addEventListener('click', (e) => {
-      const trigger = e.target.closest('.nav-cta, .cta-btns .btn-primary, .res-book');
+      const trigger = e.target.closest('.nav-cta, .res-book');
       if (trigger) {
         e.preventDefault();
         window.openReqModal();
