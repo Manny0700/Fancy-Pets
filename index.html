@@ -906,6 +906,14 @@ body.mobile-menu-open{overflow:hidden}
   .mobile-menu-close{top:0.9rem;right:0.9rem;width:40px;height:40px}
   .mobile-menu-close svg{width:18px;height:18px}
 }
+
+/* Hero "Fancy Pets" big wordmark on left side */
+.hero-brand{display:block;margin-bottom:1.8rem}
+.hero-brand-mark{display:block;font-family:'Fraunces',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:500;letter-spacing:-0.02em;line-height:0.95;color:var(--ink);font-variation-settings:"SOFT" 50}
+.hero-brand-mark em{font-style:italic;color:var(--accent);font-variation-settings:"SOFT" 80,"WONK" 1}
+@media(max-width:780px){
+  .hero-brand-mark{font-size:clamp(2.4rem,9vw,3.6rem)}
+}
 </style>
 </head>
 <body>
@@ -991,7 +999,7 @@ body.mobile-menu-open{overflow:hidden}
 
   <div class="hero-left">
     <div class="hero-brand">
-      <span class="hero-brand-mark">Fancy Pets</span>
+      <span class="hero-brand-mark">Fancy <em>Pets</em></span>
     </div>
     <div class="hero-eyebrow">
       <span id="heroEyebrowText">The Boutique Salon for Dogs · Lake Mary, FL</span>
