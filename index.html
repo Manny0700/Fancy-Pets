@@ -767,15 +767,21 @@ body.theme-independence .logo-img-foot{filter:invert(0.85) brightness(0.9)}
   .logo-img-foot{width:170px}
 }
 
-/* ===== CAREERS SECTION ===== */
-.careers-section{padding:8rem 1.5rem;background:var(--bg2);position:relative;overflow:hidden}
-.careers-section .container{max-width:760px;margin:0 auto}
-.careers-header{text-align:center;margin-bottom:4rem}
+/* ===== CAREERS MODAL ===== */
+.careers-overlay{position:fixed;inset:0;background:rgba(20,16,12,0.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:1100;opacity:0;visibility:hidden;transition:opacity 0.4s ease,visibility 0.4s ease;display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:3rem 1.5rem;-webkit-overflow-scrolling:touch}
+.careers-overlay.open{opacity:1;visibility:visible}
+.careers-modal{background:var(--bg);border-radius:6px;max-width:760px;width:100%;position:relative;box-shadow:0 50px 100px rgba(0,0,0,0.45);transform:translateY(30px) scale(0.98);transition:transform 0.5s var(--ease-spring);margin:auto 0}
+.careers-overlay.open .careers-modal{transform:translateY(0) scale(1)}
+.careers-modal-inner{padding:3rem 2.4rem 2.4rem}
+.careers-close{position:absolute;top:1rem;right:1rem;width:40px;height:40px;background:transparent;border:1px solid var(--line);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);transition:all 0.2s ease;z-index:2}
+.careers-close svg{width:18px;height:18px}
+.careers-close:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:rotate(90deg)}
+.careers-header{text-align:center;margin-bottom:2.5rem}
 .careers-header .s-eyebrow{display:inline-block;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1.2rem}
 .careers-header .s-title{font-family:'Fraunces',serif;font-size:clamp(2.4rem,5vw,3.8rem);line-height:1.05;font-weight:400;margin:0 0 1.4rem;letter-spacing:-0.01em}
 .careers-header .s-intro{font-size:1.05rem;line-height:1.7;color:var(--ink-soft);max-width:540px;margin:0 auto}
 
-.careers-form-wrap{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2.8rem 2.4rem;box-shadow:0 30px 80px var(--shadow-soft, rgba(0,0,0,0.04))}
+.careers-form-wrap{background:transparent;border:none;border-radius:0;padding:0;box-shadow:none}
 .careers-form{display:flex;flex-direction:column;gap:1.6rem}
 .careers-honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 
@@ -820,8 +826,9 @@ body.theme-independence .logo-img-foot{filter:invert(0.85) brightness(0.9)}
 .careers-success-msg{color:var(--ink-soft);line-height:1.7;max-width:420px;margin:0 auto}
 
 @media(max-width:780px){
-  .careers-section{padding:5rem 1.2rem}
-  .careers-form-wrap{padding:2rem 1.4rem}
+  .careers-overlay{padding:1rem}
+  .careers-modal-inner{padding:2.5rem 1.4rem 1.6rem}
+  .careers-close{top:0.6rem;right:0.6rem;width:36px;height:36px}
 }
 
 /* ===== HAMBURGER BUTTON ===== */
@@ -871,6 +878,18 @@ body.mobile-menu-open .nav-burger-bar:nth-child(3){transform:translateY(-7.5px) 
 
 /* Prevent body scroll when menu is open */
 body.mobile-menu-open{overflow:hidden}
+
+/* ===== BACK TO TOP BUTTON ===== */
+.back-to-top{position:fixed;bottom:1.6rem;right:1.6rem;width:48px;height:48px;background:var(--ink);color:var(--bg);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,0.18);opacity:0;visibility:hidden;transform:translateY(20px) scale(0.8);transition:opacity 0.35s ease,visibility 0.35s ease,transform 0.4s var(--ease-spring),background 0.25s ease;z-index:50}
+.back-to-top svg{width:18px;height:18px;transition:transform 0.25s ease}
+.back-to-top.visible{opacity:1;visibility:visible;transform:translateY(0) scale(1)}
+.back-to-top:hover{background:var(--accent)}
+.back-to-top:hover svg{transform:translateY(-2px)}
+.back-to-top:active{transform:translateY(0) scale(0.92)}
+@media(max-width:600px){
+  .back-to-top{bottom:1.2rem;right:1.2rem;width:44px;height:44px}
+  .back-to-top svg{width:16px;height:16px}
+}
 </style>
 </head>
 <body>
@@ -1417,9 +1436,14 @@ body.mobile-menu-open{overflow:hidden}
 </section>
 
 <!-- ===== CAREERS / WE'RE HIRING ===== -->
-<section id="careers" class="careers-section">
-  <div class="container">
-    <div class="careers-header reveal">
+<!-- ===== CAREERS MODAL ===== -->
+<div class="careers-overlay" id="careersOverlay" role="dialog" aria-modal="true" aria-labelledby="careersTitle" aria-hidden="true">
+  <div class="careers-modal" id="careersModal">
+    <button class="careers-close" type="button" id="careersClose" aria-label="Close">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6L18 18" stroke-linecap="round"/></svg>
+    </button>
+    <div class="careers-modal-inner">
+    <div class="careers-header">
       <span class="s-eyebrow">Work With Us</span>
       <h2 class="s-title">Join the <em class="sw">team.</em></h2>
       <p class="s-intro">We're a small team passionate about dogs and the people who love them. If that sounds like you, we'd love to hear from you. Send us your info and resume — we'll be in touch.</p>
@@ -1484,8 +1508,9 @@ body.mobile-menu-open{overflow:hidden}
         <p class="careers-success-msg">Thanks for applying! We review every application personally and will be in touch soon.</p>
       </div>
     </div>
+    </div>
   </div>
-</section>
+</div>
 
 
 <footer>
@@ -2375,11 +2400,47 @@ function selectService(cardEl) {
 
 
 <script>
-/* CAREERS APPLICATION FORM */
+/* CAREERS APPLICATION MODAL */
 (function() {
   document.addEventListener('DOMContentLoaded', () => {
+    const overlay = document.getElementById('careersOverlay');
+    const closeBtn = document.getElementById('careersClose');
     const form = document.getElementById('careersForm');
-    if (!form) return;
+    if (!overlay || !form) return;
+
+    function openCareers() {
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // Reset success state if it was shown
+      form.style.display = '';
+      const successEl = document.getElementById('careersSuccess');
+      if (successEl) successEl.style.display = 'none';
+    }
+    function closeCareers() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    window.openCareersModal = openCareers;
+    window.closeCareersModal = closeCareers;
+
+    closeBtn.addEventListener('click', closeCareers);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeCareers();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeCareers();
+    });
+
+    // Wire up any #careers link to open the modal
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href="#careers"]');
+      if (link) {
+        e.preventDefault();
+        openCareers();
+      }
+    });
 
     const fileInput = document.getElementById('careersResume');
     const fileBtn = document.getElementById('careersFileBtn');
@@ -2598,6 +2659,47 @@ function selectService(cardEl) {
         closeMenu();
       }
     });
+  });
+})();
+</script>
+
+<!-- Back to top button -->
+<button class="back-to-top" id="backToTop" aria-label="Back to top" type="button">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+    <path d="M12 19V5M5 12L12 5L19 12" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+
+
+<script>
+/* BACK TO TOP BUTTON */
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('backToTop');
+    if (!btn) return;
+
+    // Show after scrolling 600px from top
+    let ticking = false;
+    function updateVisibility() {
+      const shouldShow = window.scrollY > 600;
+      btn.classList.toggle('visible', shouldShow);
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        requestAnimationFrame(updateVisibility);
+        ticking = true;
+      }
+    }, { passive: true });
+
+    btn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Initial check (in case user reloads mid-page)
+    updateVisibility();
   });
 })();
 </script>
