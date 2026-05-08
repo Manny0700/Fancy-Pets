@@ -766,6 +766,114 @@ body.theme-independence .logo-img-foot{filter:invert(0.85) brightness(0.9)}
   .logo-img{height:46px}
   .logo-img-foot{width:170px}
 }
+
+/* ===== CAREERS SECTION ===== */
+.careers-section{padding:8rem 1.5rem;background:var(--bg2);position:relative;overflow:hidden}
+.careers-section .container{max-width:760px;margin:0 auto}
+.careers-header{text-align:center;margin-bottom:4rem}
+.careers-header .s-eyebrow{display:inline-block;font-size:0.72rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1.2rem}
+.careers-header .s-title{font-family:'Fraunces',serif;font-size:clamp(2.4rem,5vw,3.8rem);line-height:1.05;font-weight:400;margin:0 0 1.4rem;letter-spacing:-0.01em}
+.careers-header .s-intro{font-size:1.05rem;line-height:1.7;color:var(--ink-soft);max-width:540px;margin:0 auto}
+
+.careers-form-wrap{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:2.8rem 2.4rem;box-shadow:0 30px 80px var(--shadow-soft, rgba(0,0,0,0.04))}
+.careers-form{display:flex;flex-direction:column;gap:1.6rem}
+.careers-honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.careers-row{display:flex;flex-direction:column}
+.careers-row.two{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+@media(max-width:600px){.careers-row.two{grid-template-columns:1fr}}
+
+.careers-label{font-size:0.74rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:0.65rem;display:flex;align-items:center;gap:0.55rem}
+.careers-label .num{font-family:'JetBrains Mono','Courier New',monospace;font-size:0.66rem;color:var(--accent);font-weight:600;letter-spacing:0.04em}
+.careers-label .req-mark{color:var(--accent);margin-left:0.2rem}
+.careers-optional{font-size:0.7rem;font-weight:400;letter-spacing:0;text-transform:none;color:var(--ink-muted);margin-left:0.5rem}
+
+.careers-input,.careers-textarea{width:100%;padding:0.95rem 1.1rem;background:transparent;border:1px solid var(--line);border-radius:4px;font-family:inherit;font-size:0.95rem;color:var(--ink);transition:border-color 0.2s ease,background 0.2s ease;-webkit-appearance:none;appearance:none}
+.careers-input:focus,.careers-textarea:focus{outline:none;border-color:var(--accent);background:var(--paper-warm)}
+.careers-textarea{resize:vertical;min-height:120px;line-height:1.6}
+
+/* File input — hide native, custom button */
+.careers-file-wrap{display:flex;align-items:center;gap:0.8rem}
+.careers-file-input{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.careers-file-btn{display:inline-flex;align-items:center;gap:0.6rem;padding:0.85rem 1.3rem;background:transparent;border:1px dashed var(--line);border-radius:4px;font-size:0.86rem;color:var(--ink-soft);cursor:pointer;transition:all 0.2s ease;flex:1}
+.careers-file-btn svg{width:18px;height:18px;flex-shrink:0;opacity:0.7}
+.careers-file-btn:hover{border-color:var(--accent);color:var(--accent);border-style:solid}
+.careers-file-btn.has-file{border-style:solid;border-color:var(--accent);color:var(--accent);background:var(--paper-warm)}
+.careers-file-clear{background:transparent;border:1px solid var(--line);color:var(--ink-soft);width:38px;height:38px;border-radius:4px;font-size:1.4rem;line-height:1;cursor:pointer;flex-shrink:0;transition:all 0.2s ease}
+.careers-file-clear:hover{border-color:var(--coral,#c85a48);color:var(--coral,#c85a48)}
+
+.careers-submit{margin-top:0.8rem;padding:1.05rem 1.4rem;background:var(--ink);color:var(--bg);border:none;border-radius:4px;font-family:inherit;font-size:0.85rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:0.7rem;transition:all 0.25s ease;align-self:stretch}
+.careers-submit svg{width:11px;height:11px;transition:transform 0.25s ease}
+.careers-submit:hover{background:var(--accent);transform:translateY(-1px)}
+.careers-submit:hover svg{transform:translate(2px,-2px)}
+.careers-submit:disabled{opacity:0.55;cursor:wait;transform:none}
+
+.careers-status{font-size:0.85rem;line-height:1.5;padding:0.8rem 1rem;border-radius:4px;display:none}
+.careers-status.show{display:block}
+.careers-status.error{display:block;background:rgba(200,90,72,0.08);color:var(--coral,#c85a48);border:1px solid rgba(200,90,72,0.25)}
+
+/* Success state */
+.careers-success{text-align:center;padding:2.5rem 1rem}
+.careers-success-icon{width:64px;height:64px;border-radius:50%;background:var(--accent);color:var(--bg);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem}
+.careers-success-icon svg{width:30px;height:30px}
+.careers-success-title{font-family:'Fraunces',serif;font-size:2rem;font-weight:400;margin:0 0 0.8rem}
+.careers-success-msg{color:var(--ink-soft);line-height:1.7;max-width:420px;margin:0 auto}
+
+@media(max-width:780px){
+  .careers-section{padding:5rem 1.2rem}
+  .careers-form-wrap{padding:2rem 1.4rem}
+}
+
+/* ===== HAMBURGER BUTTON ===== */
+.nav-burger{display:none;background:transparent;border:0;width:38px;height:38px;cursor:pointer;padding:0;position:relative;flex-direction:column;align-items:center;justify-content:center;gap:6px;z-index:1001}
+.nav-burger-bar{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform 0.4s var(--ease-spring),opacity 0.25s ease,background 0.3s ease}
+/* When menu is open: morph into X */
+body.mobile-menu-open .nav-burger-bar{background:var(--bg)}
+body.mobile-menu-open .nav-burger-bar:nth-child(1){transform:translateY(7.5px) rotate(45deg)}
+body.mobile-menu-open .nav-burger-bar:nth-child(2){opacity:0;transform:scaleX(0)}
+body.mobile-menu-open .nav-burger-bar:nth-child(3){transform:translateY(-7.5px) rotate(-45deg)}
+
+/* ===== MOBILE MENU OVERLAY ===== */
+.mobile-menu{position:fixed;inset:0;background:var(--ink);z-index:1000;opacity:0;visibility:hidden;transition:opacity 0.45s ease,visibility 0.45s ease;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.mobile-menu.open{opacity:1;visibility:visible}
+
+.mobile-menu-inner{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:6rem 2rem 3rem;max-width:520px;margin:0 auto}
+
+.mobile-menu-links{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.4rem}
+.mobile-menu-link{display:flex;align-items:baseline;gap:1.2rem;padding:0.85rem 0;color:var(--bg);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.08);font-family:'Fraunces',serif;font-size:2rem;line-height:1.1;font-weight:400;transition:color 0.2s ease,padding-left 0.3s ease;opacity:0;transform:translateY(20px)}
+.mobile-menu.open .mobile-menu-link{opacity:1;transform:translateY(0);transition:opacity 0.5s ease,transform 0.5s ease,color 0.2s ease,padding-left 0.3s ease}
+.mobile-menu.open .mobile-menu-links li:nth-child(1) .mobile-menu-link{transition-delay:0.1s}
+.mobile-menu.open .mobile-menu-links li:nth-child(2) .mobile-menu-link{transition-delay:0.15s}
+.mobile-menu.open .mobile-menu-links li:nth-child(3) .mobile-menu-link{transition-delay:0.2s}
+.mobile-menu.open .mobile-menu-links li:nth-child(4) .mobile-menu-link{transition-delay:0.25s}
+.mobile-menu.open .mobile-menu-links li:nth-child(5) .mobile-menu-link{transition-delay:0.3s}
+.mobile-menu.open .mobile-menu-links li:nth-child(6) .mobile-menu-link{transition-delay:0.35s}
+.mobile-menu-link:hover,.mobile-menu-link:active{color:var(--accent-soft);padding-left:0.4rem}
+.mobile-menu-link .mm-num{font-family:'JetBrains Mono','Courier New',monospace;font-size:0.7rem;font-weight:500;letter-spacing:0.04em;color:rgba(255,255,255,0.4);min-width:24px;flex-shrink:0}
+.mobile-menu-link .mm-text{flex:1}
+
+/* Italic accent for first letter / styling parity with site */
+.mobile-menu-link em{font-style:italic;color:var(--accent-soft)}
+
+.mobile-menu-cta{margin:2.4rem 0 0}
+.mobile-menu-book{display:inline-flex;align-items:center;justify-content:center;gap:0.65rem;width:100%;padding:1.05rem 1.4rem;background:var(--accent);color:var(--bg);border:none;border-radius:4px;font-family:inherit;font-size:0.85rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;transition:background 0.25s ease,transform 0.25s ease}
+.mobile-menu-book svg{width:11px;height:11px}
+.mobile-menu-book:hover,.mobile-menu-book:active{background:var(--accent-soft);transform:translateY(-1px)}
+
+.mobile-menu-foot{margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;gap:0.5rem}
+.mobile-menu-foot-link{color:rgba(255,255,255,0.6);font-size:0.88rem;text-decoration:none;padding:0.4rem 0;transition:color 0.2s ease}
+.mobile-menu-foot-link:hover,.mobile-menu-foot-link:active{color:var(--accent-soft)}
+
+/* On mobile (≤780px), show burger and hide nav-links */
+@media(max-width:780px){
+  .nav-burger{display:flex}
+  .nav-links{display:none !important}
+  /* Also hide the nav-cta button since menu has its own Book Now */
+  .nav-cta{display:none}
+}
+
+/* Prevent body scroll when menu is open */
+body.mobile-menu-open{overflow:hidden}
 </style>
 </head>
 <body>
@@ -795,8 +903,41 @@ body.theme-independence .logo-img-foot{filter:invert(0.85) brightness(0.9)}
       <span>Book Now</span>
       <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg>
     </a>
+    <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span class="nav-burger-bar"></span>
+      <span class="nav-burger-bar"></span>
+      <span class="nav-burger-bar"></span>
+    </button>
   </div>
 </nav>
+
+<!-- Mobile fullscreen menu overlay -->
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <nav class="mobile-menu-inner" aria-label="Mobile navigation">
+    <ul class="mobile-menu-links">
+      <li><a href="#services" class="mobile-menu-link"><span class="mm-num">01</span><span class="mm-text">Services</span></a></li>
+      <li><a href="#gallery" class="mobile-menu-link"><span class="mm-num">02</span><span class="mm-text">Gallery</span></a></li>
+      <li><a href="#pricing" class="mobile-menu-link"><span class="mm-num">03</span><span class="mm-text">Pricing</span></a></li>
+      <li><a href="#story" class="mobile-menu-link"><span class="mm-num">04</span><span class="mm-text">Story</span></a></li>
+      <li><a href="#contact" class="mobile-menu-link"><span class="mm-num">05</span><span class="mm-text">Contact</span></a></li>
+      <li><a href="#careers" class="mobile-menu-link"><span class="mm-num">06</span><span class="mm-text">Careers</span></a></li>
+    </ul>
+
+    <div class="mobile-menu-cta">
+      <a href="#pricing" class="mobile-menu-book">
+        <span>Book Now</span>
+        <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 9L9 1M9 1H3M9 1V7"/></svg>
+      </a>
+    </div>
+
+    <div class="mobile-menu-foot">
+      <a href="tel:+14078333880" class="mobile-menu-foot-link">(407) 833-3880</a>
+      <a href="mailto:fancypetsfl@gmail.com" class="mobile-menu-foot-link">fancypetsfl@gmail.com</a>
+      <a href="https://www.facebook.com/fancypetslakemaryfl" target="_blank" rel="noopener" class="mobile-menu-foot-link">Facebook →</a>
+    </div>
+  </nav>
+</div>
+
 
 <!-- HERO -->
 <section class="hero" id="home">
@@ -1278,6 +1419,78 @@ body.theme-independence .logo-img-foot{filter:invert(0.85) brightness(0.9)}
   </div>
 </section>
 
+<!-- ===== CAREERS / WE'RE HIRING ===== -->
+<section id="careers" class="careers-section">
+  <div class="container">
+    <div class="careers-header reveal">
+      <span class="s-eyebrow">Work With Us</span>
+      <h2 class="s-title">Join the <em class="sw">team.</em></h2>
+      <p class="s-intro">We're a small team passionate about dogs and the people who love them. If that sounds like you, we'd love to hear from you. Send us your info and resume — we'll be in touch.</p>
+    </div>
+
+    <div class="careers-form-wrap reveal reveal-delay-1">
+      <form class="careers-form" id="careersForm" novalidate>
+        <!-- Honeypot -->
+        <div class="careers-honeypot" aria-hidden="true">
+          <label for="careersWebsite">Website (leave blank)</label>
+          <input type="text" id="careersWebsite" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="careers-row two">
+          <div>
+            <label class="careers-label" for="careersName"><span class="num">01</span>Your Name</label>
+            <input class="careers-input" type="text" id="careersName" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div>
+            <label class="careers-label" for="careersPhone"><span class="num">02</span>Phone</label>
+            <input class="careers-input" type="tel" id="careersPhone" name="phone" placeholder="(407) 555-0123" inputmode="tel" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="careers-row">
+          <label class="careers-label" for="careersEmail"><span class="num">03</span>Email <span class="req-mark">*</span></label>
+          <input class="careers-input" type="email" id="careersEmail" name="email" placeholder="jane@example.com" autocomplete="email" required>
+        </div>
+
+        <div class="careers-row">
+          <label class="careers-label" for="careersMessage"><span class="num">04</span>Tell us about yourself <span class="careers-optional">(optional)</span></label>
+          <textarea class="careers-textarea" id="careersMessage" name="message" placeholder="What position are you interested in? Any relevant experience? When could you start?" rows="5"></textarea>
+        </div>
+
+        <div class="careers-row">
+          <label class="careers-label"><span class="num">05</span>Resume <span class="careers-optional">(PDF, DOC, or DOCX — max 10MB)</span></label>
+          <div class="careers-file-wrap">
+            <input type="file" id="careersResume" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="careers-file-input">
+            <label for="careersResume" class="careers-file-btn" id="careersFileBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span id="careersFileLabel">Attach Resume</span>
+            </label>
+            <button type="button" class="careers-file-clear" id="careersFileClear" style="display:none" aria-label="Remove resume">×</button>
+          </div>
+        </div>
+
+        <button class="careers-submit" type="submit" id="careersSubmitBtn">
+          <span>Submit Application</span>
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M1 11L11 1M11 1H4M11 1V8"/></svg>
+        </button>
+
+        <div class="careers-status" id="careersStatus"></div>
+      </form>
+
+      <div class="careers-success" id="careersSuccess" style="display:none">
+        <div class="careers-success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12L10 17L20 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="careers-success-title">Application <em class="sw">received.</em></h3>
+        <p class="careers-success-msg">Thanks for applying! We review every application personally and will be in touch soon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <footer>
   <div class="foot-in">
     <div class="foot-top">
@@ -1295,6 +1508,7 @@ body.theme-independence .logo-img-foot{filter:invert(0.85) brightness(0.9)}
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#story">Our Story</a></li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="#careers">Careers</a></li>
         </ul>
       </div>
       <div class="foot-col">
@@ -2161,5 +2375,234 @@ function selectService(cardEl) {
 })();
 </script>
 
+
+
+<script>
+/* CAREERS APPLICATION FORM */
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('careersForm');
+    if (!form) return;
+
+    const fileInput = document.getElementById('careersResume');
+    const fileBtn = document.getElementById('careersFileBtn');
+    const fileLabel = document.getElementById('careersFileLabel');
+    const fileClear = document.getElementById('careersFileClear');
+    const phoneInput = document.getElementById('careersPhone');
+    const submitBtn = document.getElementById('careersSubmitBtn');
+    const statusEl = document.getElementById('careersStatus');
+    const successEl = document.getElementById('careersSuccess');
+
+    // Auto-format phone (XXX) XXX-XXXX
+    if (phoneInput) {
+      phoneInput.addEventListener('input', (e) => {
+        let digits = e.target.value.replace(/\D/g, '').slice(0, 10);
+        let formatted = '';
+        if (digits.length === 0) formatted = '';
+        else if (digits.length <= 3) formatted = '(' + digits;
+        else if (digits.length <= 6) formatted = '(' + digits.slice(0, 3) + ') ' + digits.slice(3);
+        else formatted = '(' + digits.slice(0, 3) + ') ' + digits.slice(3, 6) + '-' + digits.slice(6);
+        e.target.value = formatted;
+      });
+    }
+
+    // File picker UI updates
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) {
+        resetFile();
+        return;
+      }
+      // Validate type
+      const okTypes = ['.pdf', '.doc', '.docx'];
+      const lower = file.name.toLowerCase();
+      const okType = okTypes.some(ext => lower.endsWith(ext));
+      if (!okType) {
+        showStatus('Please upload a PDF, DOC, or DOCX file.', 'error');
+        resetFile();
+        return;
+      }
+      // Validate size (10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        showStatus('Resume file is too large (max 10MB).', 'error');
+        resetFile();
+        return;
+      }
+      // Show filename
+      const sizeKb = Math.round(file.size / 1024);
+      const sizeStr = sizeKb >= 1024 ? (sizeKb / 1024).toFixed(1) + ' MB' : sizeKb + ' KB';
+      fileLabel.textContent = file.name + ' (' + sizeStr + ')';
+      fileBtn.classList.add('has-file');
+      fileClear.style.display = '';
+      hideStatus();
+    });
+
+    fileClear.addEventListener('click', resetFile);
+
+    function resetFile() {
+      fileInput.value = '';
+      fileLabel.textContent = 'Attach Resume';
+      fileBtn.classList.remove('has-file');
+      fileClear.style.display = 'none';
+    }
+
+    function showStatus(msg, kind) {
+      statusEl.textContent = msg;
+      statusEl.className = 'careers-status show ' + (kind || '');
+    }
+
+    function hideStatus() {
+      statusEl.className = 'careers-status';
+      statusEl.textContent = '';
+    }
+
+    // Read file as base64
+    function readFileAsBase64(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error('Could not read file'));
+        reader.readAsDataURL(file);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideStatus();
+
+      const name = document.getElementById('careersName').value.trim();
+      const phone = document.getElementById('careersPhone').value.trim();
+      const email = document.getElementById('careersEmail').value.trim();
+      const message = document.getElementById('careersMessage').value.trim();
+      const website = document.getElementById('careersWebsite').value;
+
+      if (!name || name.length < 2) {
+        showStatus('Please enter your full name.', 'error');
+        document.getElementById('careersName').focus();
+        return;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showStatus('Please enter a valid email address.', 'error');
+        document.getElementById('careersEmail').focus();
+        return;
+      }
+      if (phone) {
+        const digits = phone.replace(/\D/g, '');
+        if (digits.length !== 10) {
+          showStatus('Phone number must be 10 digits (or leave blank).', 'error');
+          document.getElementById('careersPhone').focus();
+          return;
+        }
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.querySelector('span').textContent = 'Sending…';
+
+      const payload = { name, phone, email, message, website };
+
+      // Read resume if attached
+      const file = fileInput.files[0];
+      if (file) {
+        try {
+          const dataUrl = await readFileAsBase64(file);
+          payload.resumeName = file.name;
+          payload.resumeData = dataUrl; // includes data:...;base64, prefix — server strips it
+        } catch (err) {
+          showStatus('Could not read resume file. Please try again.', 'error');
+          submitBtn.disabled = false;
+          submitBtn.querySelector('span').textContent = 'Submit Application';
+          return;
+        }
+      }
+
+      try {
+        const res = await fetch('/api/career-application', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          successEl.style.display = '';
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          const errData = await res.json().catch(() => ({}));
+          showStatus(errData.error || 'Something went wrong. Please email us at fancypetsfl@gmail.com.', 'error');
+        }
+      } catch (err) {
+        showStatus('Network error. Please email us at fancypetsfl@gmail.com.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.querySelector('span').textContent = 'Submit Application';
+      }
+    });
+  });
+})();
+</script>
+
+
+<script>
+/* MOBILE HAMBURGER MENU */
+(function() {
+  document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.getElementById('navBurger');
+    const menu = document.getElementById('mobileMenu');
+    if (!burger || !menu) return;
+
+    function openMenu() {
+      menu.classList.add('open');
+      menu.setAttribute('aria-hidden', 'false');
+      burger.setAttribute('aria-expanded', 'true');
+      burger.setAttribute('aria-label', 'Close menu');
+      document.body.classList.add('mobile-menu-open');
+    }
+
+    function closeMenu() {
+      menu.classList.remove('open');
+      menu.setAttribute('aria-hidden', 'true');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.setAttribute('aria-label', 'Open menu');
+      document.body.classList.remove('mobile-menu-open');
+    }
+
+    function toggleMenu() {
+      if (menu.classList.contains('open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    burger.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    // Close when any link inside the mobile menu is tapped
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        // Small delay so the link starts navigating before menu closes
+        setTimeout(closeMenu, 50);
+      });
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+
+    // Close if window resizes to desktop while menu is open
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 780 && menu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
