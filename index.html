@@ -1032,7 +1032,7 @@ body.mobile-menu-open{overflow:hidden}
     </div>
     <div class="hero-stats">
       <div>
-        <div class="num"><span class="counter" data-target="4.5" data-decimals="1">0</span><span style="font-size:1.2rem">★</span></div>
+        <div class="num"><span class="counter" data-target="4.9" data-decimals="1">0</span><span style="font-size:1.2rem">★</span></div>
         <div class="label">Google Rating</div>
       </div>
       <div class="divider"></div>
@@ -1323,7 +1323,7 @@ body.mobile-menu-open{overflow:hidden}
       <div class="about-visual reveal">
         <img src="pup-playtime.jpg" alt="Inside the Fancy Pets daycare yard">
         <div class="badge">
-          <span class="big">&#9733; 4.5</span>
+          <span class="big">&#9733; 4.9</span>
           <span class="sm">Google Rating</span>
         </div>
       </div>
@@ -2098,22 +2098,9 @@ const ADDONS = [
   {name:'Flea Treatment',desc:'',price:25},
   {name:'Gland Expression',desc:'',price:15},
   {name:'Medicated Shampoo',desc:'Antimicrobial LP3 + Vitamin D3 for sensitive skin.',price:15},
-  {name:'Medication Administration',desc:'Administration during service.',price:3},
   {name:'Nail Clipping',desc:'',price:15},
   {name:'Paw Pad Trim',desc:'',price:5},
   {name:'Sanitary Groom',desc:'',price:10},
-  {name:'Special Handling',desc:'For pets needing extra attention.',price:15},
-  {name:'Special Handling Lv 2',desc:'When additional attention required.',price:25},
-  {name:'Teeth Brushing',desc:'',price:10},
-  {name:'Teeth Cleaning',desc:'Clean Teeth Happy Feet.',price:185},
-  {name:'Clean Face',desc:'',price:5},
-  {name:'Clean Feet',desc:'',price:5},
-  {name:'Poodle Cut',desc:'Pom poms on feet and tail. Clean face & teeth included.',price:25},
-  {name:'Color — Labor',desc:'$25/hr solid · $100/hr designs.',price:15},
-  {name:'Color — Material',desc:'Charged per zone or per hour.',price:15},
-  {name:'Cat / Bunny / Guinea Nails',desc:'',price:20},
-  {name:'Food Service',desc:'Forgot your food? We can take care of it for you.',price:5},
-  {name:'Food Service — XL',desc:'For larger pets.',price:10},
 ];
 
 function updateAddonTotal() {
@@ -2210,6 +2197,24 @@ function lookupBreed() {
   }
 
   html += '<div class="addons-section">'
+       + '<div class="addons-head">'
+       + '<div class="addons-title">Add the <em class="sw">extras.</em></div>'
+       + '<div class="addons-subtitle">Optional &middot; Mix as needed</div>'
+       + '</div>'
+       + '<div class="addons-grid" id="addonsGrid" data-base-price="' + groom + '">';
+
+  ADDONS.forEach((a) => {
+    html += '<label class="addon-item">'
+         + '<input type="checkbox" onchange="updateAddonTotal()" value="' + a.price + '">'
+         + '<div class="addon-item-info">'
+         + '<div class="addon-item-name">' + a.name + '</div>'
+         + (a.desc ? '<div class="addon-item-desc">' + a.desc + '</div>' : '')
+         + '</div>'
+         + '<div class="addon-item-price">' + (a.price > 0 ? '$' + a.price : 'Free') + '</div>'
+         + '</label>';
+  });
+
+  html += '</div>'
        + '<div class="addon-total" id="estimatedTotalBox">'
        + '<span class="addon-total-label">Estimated Total</span>'
        + '<span class="addon-total-amt" id="addonTotal">$' + groom + '</span>'
@@ -2229,10 +2234,17 @@ function selectService(cardEl) {
   const cards = cardEl.parentNode.querySelectorAll('.pg-card');
   cards.forEach(c => c.classList.remove('selected'));
   cardEl.classList.add('selected');
-  // Update the displayed total to the selected service's price
+  // Update the addons grid's base price, then recompute total
   const newPrice = parseFloat(cardEl.dataset.price) || 0;
-  const totalEl = document.getElementById('addonTotal');
-  if (totalEl) totalEl.textContent = '$' + newPrice;
+  const grid = document.getElementById('addonsGrid');
+  if (grid) {
+    grid.dataset.basePrice = newPrice;
+    updateAddonTotal();
+  } else {
+    // Fallback: if no addons grid, just update the total directly
+    const totalEl = document.getElementById('addonTotal');
+    if (totalEl) totalEl.textContent = '$' + newPrice;
+  }
 }
 </script>
 
