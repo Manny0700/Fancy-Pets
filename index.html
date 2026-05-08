@@ -187,7 +187,7 @@
     .nav-logo .amp{color:var(--accent);font-style:italic;font-weight:400;display:inline-block;transition:transform 0.5s var(--ease-spring)}
     .nav-logo:hover .amp{transform:rotate(-12deg) scale(1.1)}
     .nav-right{display:flex;align-items:center;gap:1.5rem;justify-content:flex-end}
-    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links{display:none}
     .nav-links a{font-size:0.75rem;letter-spacing:0.14em;text-transform:uppercase;font-weight:500;color:var(--ink-soft);position:relative;transition:color 0.3s}
     .nav-links a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--accent);transition:width 0.4s var(--ease-out-expo)}
     .nav-links a:hover{color:var(--ink)}
@@ -825,7 +825,7 @@ body.theme-independence .logo-img-foot{filter:invert(0.85) brightness(0.9)}
 }
 
 /* ===== HAMBURGER BUTTON ===== */
-.nav-burger{display:none;background:transparent;border:0;width:38px;height:38px;cursor:pointer;padding:0;position:relative;flex-direction:column;align-items:center;justify-content:center;gap:6px;z-index:1001}
+.nav-burger{display:flex;background:transparent;border:0;width:38px;height:38px;cursor:pointer;padding:0;position:relative;flex-direction:column;align-items:center;justify-content:center;gap:6px;z-index:1001}
 .nav-burger-bar{display:block;width:22px;height:1.5px;background:var(--ink);border-radius:2px;transition:transform 0.4s var(--ease-spring),opacity 0.25s ease,background 0.3s ease}
 /* When menu is open: morph into X */
 body.mobile-menu-open .nav-burger-bar{background:var(--bg)}
@@ -864,11 +864,8 @@ body.mobile-menu-open .nav-burger-bar:nth-child(3){transform:translateY(-7.5px) 
 .mobile-menu-foot-link{color:rgba(255,255,255,0.6);font-size:0.88rem;text-decoration:none;padding:0.4rem 0;transition:color 0.2s ease}
 .mobile-menu-foot-link:hover,.mobile-menu-foot-link:active{color:var(--accent-soft)}
 
-/* On mobile (≤780px), show burger and hide nav-links */
+/* On mobile (≤780px), hide nav-cta since menu has its own Book Now */
 @media(max-width:780px){
-  .nav-burger{display:flex}
-  .nav-links{display:none !important}
-  /* Also hide the nav-cta button since menu has its own Book Now */
   .nav-cta{display:none}
 }
 
